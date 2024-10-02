@@ -1,6 +1,6 @@
 // Cart items array to store added products
 let cartItems = [];
-  
+              
 // Select all "Add to cart" buttons
 const addToCartButtons = document.querySelectorAll('.addToCart');
 
@@ -37,17 +37,20 @@ function closeCartDialog() {
 // Function to add item to cart
 function addToCart(button) {
   const card = button.closest('forge-card');
+  const quantitySelect = card.querySelector('.quantity');
+  const selectedQuantity = parseInt(quantitySelect.value);
+
   const itemData = {
     id: card.querySelector('.forge-typography--label2').textContent.split('#')[1],
     name: card.querySelector('.forge-typography--subheading1').textContent,
     price: parseFloat(card.querySelector('.forge-typography--heading2').textContent.replace('$', '')),
     image: card.querySelector('img').src,
-    quantity: 1
+    quantity: selectedQuantity
   };
 
   const existingItemIndex = cartItems.findIndex(item => item.id === itemData.id);
   if (existingItemIndex > -1) {
-    cartItems[existingItemIndex].quantity++;
+    cartItems[existingItemIndex].quantity += selectedQuantity;
   } else {
     cartItems.push(itemData);
   }
@@ -56,6 +59,9 @@ function addToCart(button) {
   updateCartDialog();
   showItemAddedDialog(itemData);
   saveCartData();
+
+  // Reset quantity select to 1
+  quantitySelect.value = '1';
 }
 
 // Function to update the cart dialog content
@@ -63,54 +69,70 @@ function updateCartDialog() {
   let cartContent = '';
   let subtotal = 0;
 
-  cartItems.forEach(item => {
-    subtotal += item.price * item.quantity;
-    cartContent += `
-      <div class="imageItemCost">
-        <img src="${item.image}" class="productImgCart"/>
-        <div class="itemCost">
-          <p class="forge-typography--subheading1">${item.name}</p>
-          <p class="forge-typography--heading2 green">$${item.price.toFixed(2)}</p>
+  if (cartItems.length === 0) {
+    cartContent = `
+      <p class="forge-typography--heading4" style="text-align: center; margin: 20px 0;">Your cart is empty</p>
+    `;
+  } else {
+    cartItems.forEach(item => {
+      subtotal += item.price * item.quantity;
+      cartContent += `
+        <div class="imageItemCost">
+          <img src="${item.image}" class="productImgCart"/>
+          <div class="itemCost">
+            <p class="forge-typography--subheading1">${item.name}</p>
+            <p class="forge-typography--heading2 green">$${(item.price * item.quantity).toFixed(2)}</p>
+          </div>
         </div>
+        <div class="quantityAddCartDialog">
+          <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="${item.quantity}">
+            ${[1, 2, 3].map(num => `<forge-option value="${num}"${num === item.quantity ? ' selected' : ''}>${num}</forge-option>`).join('')}
+          </forge-select>
+          <forge-button variant="text" class="removeFromCart" theme="error" data-id="${item.id}">
+            <forge-icon external external-type="extended" name="cart_minus" slot="start"></forge-icon>
+            Remove
+          </forge-button>
+        </div>
+      `;
+    });
+
+    const shippingFee = 5.95;
+    const processingFee = subtotal * 0.04; // 4% of subtotal
+    const salesTax = subtotal * 0.09; // Assuming 9% sales tax
+    const orderTotal = subtotal + shippingFee + processingFee + salesTax;
+
+    cartContent += `
+      <p class="forge-typography--overline">Order summary</p>
+      <div class="lineItems">
+        <p class="forge-typography--label2">Subtotal</p>
+        <p class="forge-typography--subheading1">$${subtotal.toFixed(2)}</p>
       </div>
-      <div class="quantityAddCartDialog">
-        <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="${item.quantity}">
-          ${[1, 2, 3].map(num => `<forge-option value="${num}"${num === item.quantity ? ' selected' : ''}>${num}</forge-option>`).join('')}
-        </forge-select>
-        <forge-button variant="text" class="removeFromCart" theme="error" data-id="${item.id}">
-          <forge-icon external external-type="extended" name="cart_minus" slot="start"></forge-icon>
-          Remove
-        </forge-button>
+      <div class="lineItems">
+        <p class="forge-typography--label2">Shipping and handling fee</p>
+        <p class="forge-typography--subheading1">$${shippingFee.toFixed(2)}</p>
+      </div>
+      <div class="lineItems">
+        <p class="forge-typography--label2">Processing fee</p>
+        <p class="forge-typography--subheading1">$${processingFee.toFixed(2)}</p>
+      </div>
+      <div class="lineItems">
+        <p class="forge-typography--label2">Sales tax</p>
+        <p class="forge-typography--subheading1">$${salesTax.toFixed(2)}</p>
+      </div>
+      <div class="grandTotal">
+        <p class="forge-typography--heading2">Order total</p>
+        <p class="forge-typography--heading3 green">$${orderTotal.toFixed(2)}</p>
       </div>
     `;
-  });
+  }
 
-  const shippingFee = 5.95;
-  const processingFee = subtotal * 0.04; // 4% of subtotal
-  const salesTax = subtotal * 0.09; // Assuming 9% sales tax
-  const orderTotal = subtotal + shippingFee + processingFee + salesTax;
-
+  // Add Clear Cart button
   cartContent += `
-    <p class="forge-typography--overline">Order summary</p>
-    <div class="lineItems">
-      <p class="forge-typography--label2">Subtotal</p>
-      <p class="forge-typography--subheading1">$${subtotal.toFixed(2)}</p>
-    </div>
-    <div class="lineItems">
-      <p class="forge-typography--label2">Shipping and handling fee</p>
-      <p class="forge-typography--subheading1">$${shippingFee.toFixed(2)}</p>
-    </div>
-    <div class="lineItems">
-      <p class="forge-typography--label2">Processing fee</p>
-      <p class="forge-typography--subheading1">$${processingFee.toFixed(2)}</p>
-    </div>
-    <div class="lineItems">
-      <p class="forge-typography--label2">Sales tax</p>
-      <p class="forge-typography--subheading1">$${salesTax.toFixed(2)}</p>
-    </div>
-    <div class="grandTotal">
-      <p class="forge-typography--heading2">Order total</p>
-      <p class="forge-typography--heading3 green">$${orderTotal.toFixed(2)}</p>
+    <div style="margin-top: 20px;">
+      <forge-button variant="outlined" class="clearCart" theme="error" style="width: 100%;">
+        <forge-icon external external-type="extended" name="cart_remove" slot="start"></forge-icon>
+        Clear Cart
+      </forge-button>
     </div>
   `;
 
@@ -125,6 +147,16 @@ function updateCartDialog() {
   cartDialogBody.querySelectorAll('.quantity').forEach(select => {
     select.addEventListener('change', (event) => updateItemQuantity(event.target));
   });
+
+  // Add event listener to the Clear Cart button
+  const clearCartButton = cartDialogBody.querySelector('.clearCart');
+  if (clearCartButton) {
+    clearCartButton.addEventListener('click', () => {
+      if (confirm('Are you sure you want to clear your cart? This action cannot be undone.')) {
+        clearCart();
+      }
+    });
+  }
 }
 
 // Function to show the Item Added Dialog for a specific item
@@ -139,7 +171,7 @@ function showItemAddedDialog(item) {
     dialog.setAttribute('aria-labelledby', 'dialog-title');
     dialog.setAttribute('aria-describedby', 'dialog-message');
     dialog.setAttribute('placement', 'center');
-    dialog.setAttribute('fullscreen-threshold', '0'); // Add this line to set fullscreen-threshold
+    dialog.setAttribute('fullscreen-threshold', '0');
 
     const dialogContent = `
       <forge-scaffold>
@@ -181,6 +213,9 @@ function showItemAddedDialog(item) {
       closeItemAddedDialog(dialog);
       // Add your checkout logic here
     });
+  } else {
+    // Update the quantity in the existing dialog
+    dialog.querySelector('span[slot="value"]').textContent = item.quantity;
   }
 
   // Show the dialog
@@ -221,6 +256,34 @@ addToCartButtons.forEach(button => {
   });
 });
 
+// Function to save cart data to localStorage
+function saveCartData() {
+  localStorage.setItem('cartItems', JSON.stringify(cartItems));
+}
+
+// Function to load cart data from localStorage
+function loadCartData() {
+  const savedCartItems = localStorage.getItem('cartItems');
+  if (savedCartItems) {
+    cartItems = JSON.parse(savedCartItems);
+    updateBadge();
+    updateCartDialog();
+  }
+}
+
+// Function to clear all items from the cart
+function clearCart() {
+  cartItems = [];
+  updateBadge();
+  updateCartDialog();
+  saveCartData();
+}
+
+// Initialize
+loadCartData();
+updateBadge();
+updateCartDialog();
+
 // Add event listener to close button in the cart dialog
 const cartCloseButton = cartDialog.querySelector('forge-icon-button[aria-label="Close dialog"]');
 if (cartCloseButton) {
@@ -233,132 +296,6 @@ if (cartContinueShoppingButton) {
   cartContinueShoppingButton.addEventListener('click', closeCartDialog);
 }
 
-// Initialize the badge and cart dialog on page load
-updateBadge();
-updateCartDialog();
-
-// Function to save cart data to localStorage
-function saveCartData() {
-localStorage.setItem('cartItems', JSON.stringify(cartItems));
-}
-
-function loadCartData() {
-const savedCartItems = localStorage.getItem('cartItems');
-if (savedCartItems) {
-  cartItems = JSON.parse(savedCartItems);
-  updateBadge();
-  updateCartDialog();
-}
-}
-
-// Call loadCartData on page load
-loadCartData();
-
-// Function to clear all items from the cart
-function clearCart() {
-cartItems = [];
-updateBadge();
-updateCartDialog();
-saveCartData();
-}
-
-// Function to update the cart dialog content
-function updateCartDialog() {
-let cartContent = '';
-let subtotal = 0;
-
-if (cartItems.length === 0) {
-  cartContent = `
-    <p class="forge-typography--heading4" style="text-align: center; margin: 20px 0;">Your cart is empty</p>
-  `;
-} else {
-  cartItems.forEach(item => {
-    subtotal += item.price * item.quantity;
-    cartContent += `
-      <div class="imageItemCost">
-        <img src="${item.image}" class="productImgCart"/>
-        <div class="itemCost">
-          <p class="forge-typography--subheading1">${item.name}</p>
-          <p class="forge-typography--heading2 green">$${item.price.toFixed(2)}</p>
-        </div>
-      </div>
-      <div class="quantityAddCartDialog">
-        <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="${item.quantity}">
-          ${[1, 2, 3].map(num => `<forge-option value="${num}"${num === item.quantity ? ' selected' : ''}>${num}</forge-option>`).join('')}
-        </forge-select>
-        <forge-button variant="text" class="removeFromCart" theme="error" data-id="${item.id}">
-          <forge-icon external external-type="extended" name="cart_minus" slot="start"></forge-icon>
-          Remove
-        </forge-button>
-      </div>
-    `;
-  });
-
-  const shippingFee = 5.95;
-  const processingFee = subtotal * 0.04; // 4% of subtotal
-  const salesTax = subtotal * 0.09; // Assuming 9% sales tax
-  const orderTotal = subtotal + shippingFee + processingFee + salesTax;
-
-  cartContent += `
-    <p class="forge-typography--overline">Order summary</p>
-    <div class="lineItems">
-      <p class="forge-typography--label2">Subtotal</p>
-      <p class="forge-typography--subheading1">$${subtotal.toFixed(2)}</p>
-    </div>
-    <div class="lineItems">
-      <p class="forge-typography--label2">Shipping and handling fee</p>
-      <p class="forge-typography--subheading1">$${shippingFee.toFixed(2)}</p>
-    </div>
-    <div class="lineItems">
-      <p class="forge-typography--label2">Processing fee</p>
-      <p class="forge-typography--subheading1">$${processingFee.toFixed(2)}</p>
-    </div>
-    <div class="lineItems">
-      <p class="forge-typography--label2">Sales tax</p>
-      <p class="forge-typography--subheading1">$${salesTax.toFixed(2)}</p>
-    </div>
-    <div class="grandTotal">
-      <p class="forge-typography--heading2">Order total</p>
-      <p class="forge-typography--heading3 green">$${orderTotal.toFixed(2)}</p>
-    </div>
-  `;
-}
-
-// Add Clear Cart button
-cartContent += `
-  <div style="margin-top: 20px;">
-    <forge-button variant="outlined" class="clearCart" theme="error" style="width: 100%;">
-      <forge-icon external external-type="extended" name="cart_remove" slot="start"></forge-icon>
-      Clear Cart
-    </forge-button>
-  </div>
-`;
-
-cartDialogBody.innerHTML = cartContent;
-
-// Add event listeners to new remove buttons
-cartDialogBody.querySelectorAll('.removeFromCart').forEach(button => {
-  button.addEventListener('click', () => removeFromCart(button.dataset.id));
-});
-
-// Add event listeners to quantity selects
-cartDialogBody.querySelectorAll('.quantity').forEach(select => {
-  select.addEventListener('change', (event) => updateItemQuantity(event.target));
-});
-
-// Add event listener to the Clear Cart button
-const clearCartButton = cartDialogBody.querySelector('.clearCart');
-if (clearCartButton) {
-  clearCartButton.addEventListener('click', () => {
-    if (confirm('Are you sure you want to clear your cart? This action cannot be undone.')) {
-      clearCart();
-    }
-  });
-}
-}
-
-// ... (previous code remains the same)
-
 // Select all item cards
 const itemCards = document.querySelectorAll('forge-card');
 
@@ -367,39 +304,35 @@ const searchInput = document.querySelector('forge-text-field.search input');
 
 // Function to display all items
 function displayAllItems() {
-itemCards.forEach(card => {
-  card.style.display = 'block';
-});
+  itemCards.forEach(card => {
+    card.style.display = 'block';
+  });
 }
 
 // Function to filter items based on search input
 function filterItems(searchTerm) {
-itemCards.forEach(card => {
-  const itemName = card.querySelector('.forge-typography--subheading1').textContent.toLowerCase();
-  const itemId = card.querySelector('.forge-typography--label2').textContent.toLowerCase();
-  
-  if (itemName.includes(searchTerm) || itemId.includes(searchTerm)) {
-    card.style.display = 'block';
-  } else {
-    card.style.display = 'none';
-  }
-});
+  itemCards.forEach(card => {
+    const itemName = card.querySelector('.forge-typography--subheading1').textContent.toLowerCase();
+    const itemId = card.querySelector('.forge-typography--label2').textContent.toLowerCase();
+    
+    if (itemName.includes(searchTerm) || itemId.includes(searchTerm)) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
 }
 
 // Event listener for search input
 searchInput.addEventListener('input', (event) => {
-const searchTerm = event.target.value.toLowerCase().trim();
-
-if (searchTerm === '') {
-  displayAllItems();
-} else {
-  filterItems(searchTerm);
-}
+  const searchTerm = event.target.value.toLowerCase().trim();
+  
+  if (searchTerm === '') {
+    displayAllItems();
+  } else {
+    filterItems(searchTerm);
+  }
 });
 
 // Initialize by displaying all items
 displayAllItems();
-
-// ... (rest of the code remains the same)
-
-
