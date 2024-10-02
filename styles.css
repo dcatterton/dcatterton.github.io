@@ -178,6 +178,15 @@ box-shadow: 0px 5px 10px -5px rgba(0,0,0,0.2);
     gap: 20px;
 }
 
+.quantityAddCartDesc {
+    padding-bottom:10px;
+    margin-top:20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:20px;
+}
+
 .lineItems {
     display: flex;
     flex-direction: row;
@@ -377,4 +386,9 @@ forge-checkbox {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.productImgLg {
+    max-width:200px;
+    max-height: 200px;
 }

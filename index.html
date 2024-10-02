@@ -192,7 +192,7 @@
           </p>
         </forge-inline-message> -->
 
-        <forge-card data-category="hot-food">
+        <forge-card data-category="hot-food" id="open-dialog9">
             <div class="imageItemCost">
                 <img src="https://www.theramenrater.com/wp-content/uploads/2019/11/2019_11_21_3444_001.jpg" class="productImg"/>
                 <div class="itemCost">
@@ -654,6 +654,52 @@
             </forge-toolbar>
           </forge-scaffold>
         </forge-dialog> -->
+
+        <forge-dialog
+          trigger="open-dialog9"
+          aria-labelledby="dialog-title"
+          aria-describedby="dialog-message"
+          type="dialog"
+          class="itemDescDialog"
+          fullscreen-threshold="0"
+          mode="modal"
+          placement="center"
+          preset="bottom-sheet"        
+        >
+          <forge-scaffold>
+            <forge-toolbar slot="header" divider style="min-height:60px;">
+              <h1 class="forge-typography--heading4" id="dialog-title" slot="start">
+                Item detail
+              </h1>
+              <forge-icon-button slot="end" aria-label="Close dialog" >
+                <forge-icon external name="close"></forge-icon>
+              </forge-icon-button>
+            </forge-toolbar>
+            <div slot="body" id="dialog-message" class="imageDesc">
+              <img src="https://www.theramenrater.com/wp-content/uploads/2019/11/2019_11_21_3444_001.jpg" alt="" class="productImgLg" />
+              <p class="forge-typography--subheading2" style="margin:10px 0;">DRAGON EXPRESS HOT AND SPICY VEGETABLE LOW SODIUM RAMEN</p>
+              <p class="forge-typography--subheading1" style="margin: 0; color:rgb(104, 104, 104);">Made with vegetable-based ingredients, so you can go ahead and grab that savory beef flavor by the (vegetarian) horns.</p>
+              <p class="forge-typography--heading3 green priceDesc" style="margin:10px 0px;">$2.06</p>
+              <div class="quantityAddCartDesc">
+                <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
+             <forge-option value="1">1</forge-option>
+             <forge-option value="2">2</forge-option>
+             <forge-option value="3">3</forge-option>
+             <forge-option value="4">4</forge-option>
+             <forge-option value="5">5</forge-option>
+             <forge-option value="6">6</forge-option>
+             <forge-option value="7">7</forge-option>
+             <forge-option value="8">8</forge-option>
+             <forge-option value="9">9</forge-option>
+           </forge-select>
+                     <forge-button variant="tonal" class="addToCart" theme="success">
+                         <forge-icon external name="add_shopping_cart" slot="start"></forge-icon>
+                         Add to cart</forge-button>
+             </div>
+            </div>
+          
+          </forge-scaffold>
+        </forge-dialog>
 
                   <!-- Order Limit Dialog -->
 
