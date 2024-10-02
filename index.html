@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Page Title</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="https://cdn.forge.tylertech.com/v1/libs/@tylertech/forge@3.1.3/forge.css" />
+<link rel="stylesheet" href="https://cdn.forge.tylertech.com/v1/css/tyler-font.css" />
+<style>
+</style>
+<script src=""></script>
+<script type="module" src="https://cdn.forge.tylertech.com/v1/libs/@tylertech/forge@3.1.3/index.js"></script>
+
+<body>
+
+
+    <forge-app-bar title-text="" theme="custom" class="custom-app-bar">
+        <forge-app-bar-menu-button slot="start"></forge-app-bar-menu-button>
+        <img src="https://visitor.vendengine.com/images/correctpay-color.png" slot="logo" class="cpLogo" id="open-dialog5"/>
+      </forge-app-bar>
+      
+      <div class="titleHeader">
+        <forge-badge class="facilityBadge" theme="success" strong="true">Morgan County Correctional Complex</forge-badge>
+        <h2>Standard Commissary Orders</h2>
+        <forge-inline-message theme="info-secondary" class="inlineAlert">
+          <forge-icon slot="icon" external name="error"></forge-icon>
+          <p style="text-align:left;">
+            These orders are capped at $125 per month; full orders may not be fulfilled if the inmate contributed to reaching the limit.
+          </p>
+        </forge-inline-message>
+      </div>
+
+      
+      
+      <forge-toolbar class="searchToolbar">
+        <div slot="start">
+            <forge-text-field class="search">
+                <forge-icon external name="search" slot="start"></forge-icon>    
+            <label>Search for items</label>
+            <input type="text" />
+          </forge-text-field>
+        </div>
+        <div slot="end">
+            <forge-icon-button id="open-dialog" aria-label="Icon button demo" class="cartIcon">
+            <forge-icon external name="shopping_cart"></forge-icon>
+            <forge-badge slot="badge" theme="success" strong="true">0</forge-badge>
+          </forge-icon-button>
+        </div>
+      </forge-toolbar>
+
+      <div class="mobile-container">
+
+        <forge-button variant="outlined" id="open-dialog2" class="filterSortBtn" theme="success">
+          <forge-icon external name="sort" slot="start"></forge-icon>
+          Filter or sort items</forge-button>
+
+
+          <forge-dialog
+          trigger="open-dialog2"
+          aria-labelledby="dialog-title"
+          aria-describedby="dialog-message"
+          fullscreenThreshol="450"
+          type="dialog"
+        >
+          <forge-scaffold>
+            <forge-toolbar slot="header" divider>
+              <h1 class="forge-typography--heading4" id="dialog-title" slot="start">
+                Filter or sort items
+              </h1>
+              <forge-icon-button slot="end" aria-label="Close dialog" >
+                <a href="/">
+                <forge-icon external name="close"></forge-icon>
+            </a>
+              </forge-icon-button>
+            </forge-toolbar>
+            <div slot="body" id="dialog-message">
+        
+              <forge-radio-group name="radios" class="sortRadios">
+                <p class="forge-typography--heading1">Sort by</p>
+                <forge-radio
+                  name="radios"
+                  value="1"
+                  label-position
+                  aria-disabled="false"
+                  tabindex="0"
+                >
+                  Best sellers
+                </forge-radio>
+                <forge-radio
+                  name="radios"
+                  value="1"
+                  tabindex="0"
+                  label-position
+                  aria-disabled="false"
+                >
+                  Price: low to high
+                </forge-radio>
+                <forge-radio
+                  name="radios"
+                  value="1"
+                  tabindex="0"
+                  label-position
+                  aria-disabled="false"
+                >
+                Price: high to low
+                </forge-radio>
+                <forge-radio
+                  name="radios"
+                  value="1"
+                  tabindex="0"
+                  label-position
+                  aria-disabled="false"
+                >
+                  Item name: A - Z
+                </forge-radio>
+                <forge-radio
+                  name="radios"
+                  value="1"
+                  tabindex="0"
+                  label-position
+                  aria-disabled="false"
+                >
+                Item name: Z - A
+                </forge-radio>
+              </forge-radio-group>
+
+              <div style="margin: 20px 0;"><forge-divider></forge-divider></div>
+
+              <div class="sortRadios">
+              <p class="forge-typography--heading1">Filter by item category</p>
+              <forge-checkbox>Beverages</forge-checkbox>
+              <forge-checkbox>Candy</forge-checkbox>
+              <forge-checkbox>Chips</forge-checkbox>
+              <forge-checkbox>Condiments and seasonings</forge-checkbox>
+              <forge-checkbox>Cookies</forge-checkbox>
+              <forge-checkbox>Hot food</forge-checkbox>
+              <forge-checkbox>Hyigene</forge-checkbox>
+              <forge-checkbox>Personal care</forge-checkbox>
+              <forge-checkbox>Snacks</forge-checkbox>
+            </div>
+
+                    
+                    
+ 
+            </div>
+            <forge-toolbar slot="footer" divider inverted="true" class="footerDialog">
+                <forge-button slot="end" variant="outlined" theme="success"><a href="/">Cancel</a></forge-button>
+                <forge-button slot="end" variant="raised" class="checkoutBtn" theme="success"><a href="/">Apply filters</a></forge-button>
+            </forge-toolbar>
+          </forge-scaffold>
+        </forge-dialog>
+
+        <!-- <p class="forge-typography--subheading1">Categories</p>
+        <forge-chip-set type="filter" theme="success" class="categories">
+            <forge-chip value="payments" type="filter">Beverages</forge-chip>
+            <forge-chip value="bills" type="filter">Candy</forge-chip>
+            <forge-chip value="adjustments" type="filter">Chips</forge-chip>
+            <forge-chip value="payments" type="filter">Hot food</forge-chip>
+            <forge-chip value="bills" type="filter">Hyigene</forge-chip>
+            <forge-chip value="adjustments" type="filter">Personal care</forge-chip>
+            <forge-chip value="adjustments" type="filter">Snacks</forge-chip>
+          </forge-chip-set> -->
+
+        <!-- <div class="filterSort">
+        <forge-select class="filterCategory" aria-label="Label" label="Filter by category" floatLabel="true" density="small" value="All" multiple>
+            <forge-option class="test" value="1">Beverages</forge-option>
+            <forge-option value="2">Candy</forge-option>
+            <forge-option value="3">Chips</forge-option>
+            <forge-option value="4">Condiments and seasonings</forge-option>
+            <forge-option value="5">Cookies</forge-option>
+            <forge-option value="6">Hyigene</forge-option>
+            <forge-option value="7">Personal care</forge-option>
+            <forge-option value="8">Stationery</forge-option>
+            <forge-option value="9">Sweet treats</forge-option>
+          </forge-select>
+
+          <forge-select class="sort" aria-label="Label" label="Sort by" floatLabel="true" density="small" value="All">
+            <forge-option value="1">Best sellers</forge-option>
+            <forge-option value="2">Price: Low to high</forge-option>
+            <forge-option value="3">Price: High to low</forge-option>
+            <forge-option value="3">Item name: A - Z</forge-option>
+            <forge-option value="3">Item name: Z - A</forge-option>
+          </forge-select>
+          </div> -->
+
+        <p class="forge-typography--subheading1">323 items</p>
+
+        <!-- <forge-inline-message theme="info-secondary" style="margin-bottom:20px;">
+          <forge-icon external external-type="extended" slot="icon" name="truck_delivery_outline"></forge-icon>
+          <p>
+            Orders must be placed by 2:00 AM CDT on Tuesdays for same-week delivery; otherwise, they will be delivered the next week.
+          </p>
+        </forge-inline-message> -->
+
+        <forge-card>
+            <div class="imageItemCost">
+                <img src="https://www.theramenrater.com/wp-content/uploads/2019/11/2019_11_21_3444_001.jpg" class="productImg"/>
+                <div class="itemCost">
+                  <p class="forge-typography--label2" style="color:gray">Item #636783</p>
+                <p class="forge-typography--subheading1">DRAGON EXPRESS HOT AND SPICY VEGETABLE LOW SODIUM RAMEN</p>
+                <p class="forge-typography--heading2 green">$2.06</p>
+            </div>
+            </div>
+            <div class="quantityAddCart">
+                <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
+                    <forge-option value="1">1</forge-option>
+                    <forge-option value="2">2</forge-option>
+                    <forge-option value="3">3</forge-option>
+                  </forge-select>
+                    <forge-button variant="tonal" class="addToCart" theme="success" id="open-dialog4">
+                        <forge-icon external name="add_shopping_cart" slot="start"></forge-icon>
+                        Add to cart</forge-button>
+            </div>
+          </forge-card>
+
+          <forge-card>
+            <div class="imageItemCost">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fartsmidnorthcoast.com%2Fwp-content%2Fuploads%2F2014%2F05%2Fno-image-available-icon-6.png&f=1&nofb=1&ipt=da63b13de82d4734e6348c961222fd80df2d6e5baa1fc66b724cd62b3d8d771c&ipo=images" class="productImg"/>
+                <div class="itemCost">
+                  <p class="forge-typography--label2" style="color:gray">Item #601922</p>
+                <p class="forge-typography--subheading1">BACK COUNTRY CHICKEN CHILI WITH BEANS</p>
+                <p class="forge-typography--heading2 green">$2.43</p>
+            </div>
+            </div>
+            <div class="quantityAddCart">
+                <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
+                    <forge-option value="1">1</forge-option>
+                    <forge-option value="2">2</forge-option>
+                    <forge-option value="3">3</forge-option>
+                  </forge-select>
+                    <forge-button variant="tonal" class="addToCart" theme="success">
+                        <forge-icon external name="add_shopping_cart" slot="start"></forge-icon>
+                        Add to cart</forge-button>
+            </div>
+          </forge-card>
+
+          <forge-card>
+            <div class="imageItemCost">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.minimus.biz%2Fimages%2FF40-4129503-8300bg.jpg&f=1&nofb=1&ipt=4fc2cfbe61e9a221df73a7434b7dfcacb2e35e7acd3fe5180df9c70a34514611&ipo=images" class="productImg"/>
+                <div class="itemCost">
+                  <p class="forge-typography--label2" style="color:gray">Item #619292</p>
+                <p class="forge-typography--subheading1">Act 2 Butter Lovers Popcorn</p>
+                <p class="forge-typography--heading2 green">$0.83</p>
+            </div>
+            </div>
+            <div class="quantityAddCart">
+                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                    <forge-option value="1">1</forge-option>
+                    <forge-option value="2">2</forge-option>
+                    <forge-option value="3">3</forge-option>
+                  </forge-select>
+                    <forge-button variant="tonal" class="addToCart" theme="success">
+                        <forge-icon external name="add_shopping_cart" slot="start"></forge-icon>
+                        Add to cart</forge-button>
+            </div>
+          </forge-card>
+
+          <forge-card>
+            <div class="imageItemCost">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.influenster.com%2FeyJidWNrZXQiOiAiaW5mbHVlbnN0ZXJfcHJvZHVjdGlvbiIsICJrZXkiOiAibWVkaWEvcHJvZHVjdC9pbWFnZS9mMjU4OTY4NC0wNGYxLTQ2M2ItYWUwYy02OTQ2ZDlmMmI3YzQucG5nIiwgImVkaXRzIjogeyJyZXNpemUiOiB7IndpZHRoIjogNzUwLCAiaGVpZ2h0IjogNzUwLCAiZml0IjogImluc2lkZSIsICJiYWNrZ3JvdW5kIjogeyJyIjogMSwgImciOiAxLCAiYiI6IDEsICJhbHBoYSI6IDB9LCAid2l0aG91dEVubGFyZ2VtZW50IjogdHJ1ZX19LCAiZXh0ZW5kIjoge319&f=1&nofb=1&ipt=a832b80b9024fa0ae1fb3d86e12e042c6e2505bfad64db8d5eea9917bee3f050&ipo=images" class="productImg"/>
+                <div class="itemCost">
+                  <p class="forge-typography--label2" style="color:gray">Item #611892</p>
+                <p class="forge-typography--subheading1">BIGELOW GREEN TEA CLASSIC 20 CT</p>
+                <p class="forge-typography--heading2 green">$3.75</p>
+            </div>
+            </div>
+            <div class="quantityAddCart">
+                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                    <forge-option value="1">1</forge-option>
+                    <forge-option value="2">2</forge-option>
+                    <forge-option value="3">3</forge-option>
+                  </forge-select>
+                    <forge-button variant="tonal" class="addToCart" theme="success">
+                        <forge-icon external name="add_shopping_cart" slot="start"></forge-icon>
+                        Add to cart</forge-button>
+            </div>
+          </forge-card>
+
+          <forge-card>
+            <div class="imageItemCost">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi5.walmartimages.com%2Fasr%2F6c0416fe-561d-4f38-8a7a-c8e468b1b6cd_1.d2c3190be373bea3c854643f31367c2e.jpeg&f=1&nofb=1&ipt=4f4cc93ab27dc51a3e9027d2bfa8923805a35789cdcb4f7c39b403ff793df203&ipo=images" class="productImg"/>
+                <div class="itemCost">
+                  <p class="forge-typography--label2" style="color:gray">Item #638281</p>
+                <p class="forge-typography--subheading1">CHEX MIX TRADITIONAL MIX 8.75 OZ</p>
+                <p class="forge-typography--heading2 green">$5.75</p>
+            </div>
+            </div>
+            <div class="quantityAddCart">
+                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                    <forge-option value="1">1</forge-option>
+                    <forge-option value="2">2</forge-option>
+                    <forge-option value="3">3</forge-option>
+                  </forge-select>
+                    <forge-button variant="tonal" id="open-dialog3" class="addToCart" theme="success">
+                        <forge-icon external name="add_shopping_cart" slot="start"></forge-icon>
+                        Add to cart</forge-button>
+            </div>
+          </forge-card>
+
+          <forge-card>
+            <div class="imageItemCost">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi5.walmartimages.com%2Fseo%2FDial-Complete-Antibacterial-Deodorant-Bar-Soap-Gold-4-oz-12-Bars_75e650a7-8999-45f9-a754-cd7a59860689.156461c8dfe7cd61b4a662d43a8b3943.jpeg&f=1&nofb=1&ipt=bf8a3d2dc87cf0238adde5706bc60f2d22dc7c5086d190bd56ca7ce555312b2b&ipo=images" class="productImg"/>
+                <div class="itemCost">
+                  <p class="forge-typography--label2" style="color:gray">Item #638282</p>
+                <p class="forge-typography--subheading1">DIAL ANTIBACTERIAL SOAP BAR 4 OZ</p>
+                <p class="forge-typography--heading2 green">$1.25</p>
+            </div>
+            </div>
+            <div class="quantityAddCart">
+                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                    <forge-option value="1">1</forge-option>
+                    <forge-option value="2">2</forge-option>
+                    <forge-option value="3">3</forge-option>
+                  </forge-select>
+                    <forge-button variant="tonal" class="addToCart" theme="success">
+                        <forge-icon external name="add_shopping_cart" slot="start"></forge-icon>
+                        Add to cart</forge-button>
+            </div>
+        </forge-card>
+        
+        <forge-card>
+            <div class="imageItemCost">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi5.walmartimages.com%2Fasr%2F53071321-5bfb-4699-ae57-8009cbfcab68_7.9a922efea4c4cf6f7211d1a4dfdd6847.png&f=1&nofb=1&ipt=cb27f216473f3ccbfb7c4fa0af364f63b48753121cff83f9b5e193798907d69c&ipo=images" class="productImg"/>
+                <div class="itemCost">
+                  <p class="forge-typography--label2" style="color:gray">Item #638283</p>
+                <p class="forge-typography--subheading1">COLGATE TOOTHPASTE 4.2 OZ</p>
+                <p class="forge-typography--heading2 green">$2.50</p>
+            </div>
+            </div>
+            <div class="quantityAddCart">
+                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                    <forge-option value="1">1</forge-option>
+                    <forge-option value="2">2</forge-option>
+                    <forge-option value="3">3</forge-option>
+                  </forge-select>
+                    <forge-button variant="tonal" class="addToCart" theme="success">
+                        <forge-icon external name="add_shopping_cart" slot="start"></forge-icon>
+                        Add to cart</forge-button>
+            </div>
+        </forge-card>
+        
+        <forge-card>
+            <div class="imageItemCost">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fassets.wakefern.com%2Fis%2Fimage%2Fwakefern%2F2220094020-001%3F%24Mi9Product_detail%24&f=1&nofb=1&ipt=059ed0ddcaf19d5ecd741debfd205b040fe1a8d1cc71adb9b4647c1e1b74fc98&ipo=images" class="productImg"/>
+                <div class="itemCost">
+                  <p class="forge-typography--label2" style="color:gray">Item #638284</p>
+                <p class="forge-typography--subheading1">SPEED STICK DEODORANT 1.8 OZ</p>
+                <p class="forge-typography--heading2 green">$3.15</p>
+            </div>
+            </div>
+            <div class="quantityAddCart">
+                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                    <forge-option value="1">1</forge-option>
+                    <forge-option value="2">2</forge-option>
+                    <forge-option value="3">3</forge-option>
+                  </forge-select>
+                    <forge-button variant="tonal" class="addToCart" theme="success">
+                        <forge-icon external name="add_shopping_cart" slot="start"></forge-icon>
+                        Add to cart</forge-button>
+            </div>
+        </forge-card>
+        
+        <forge-card>
+            <div class="imageItemCost">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi5.walmartimages.com%2Fseo%2FMaruchan-Instant-Lunch-Chicken-Flavor-Instant-Lunch-2-25-oz-8-pack_cc1721e1-1190-46b1-9b8a-3e25c6c1dd34.ab2aad807e72b6fb5dac9ee2256029c2.jpeg&f=1&nofb=1&ipt=422d2dc9a976a604f9c54d5780a7ee1add144592d3e9509ca599ed0f4e5eb9a7&ipo=images" class="productImg"/>
+                <div class="itemCost">
+                  <p class="forge-typography--label2" style="color:gray">Item #638285</p>
+                <p class="forge-typography--subheading1">MARUCHAN INSTANT LUNCH CHICKEN 2.25 OZ</p>
+                <p class="forge-typography--heading2 green">$0.75</p>
+            </div>
+            </div>
+            <div class="quantityAddCart">
+                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                    <forge-option value="1">1</forge-option>
+                    <forge-option value="2">2</forge-option>
+                    <forge-option value="3">3</forge-option>
+                  </forge-select>
+                    <forge-button variant="tonal" class="addToCart" theme="success">
+                        <forge-icon external name="add_shopping_cart" slot="start"></forge-icon>
+                        Add to cart</forge-button>
+            </div>
+        </forge-card>
+        
+        <forge-card>
+            <div class="imageItemCost">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fartsmidnorthcoast.com%2Fwp-content%2Fuploads%2F2014%2F05%2Fno-image-available-icon-6.png&f=1&nofb=1&ipt=da63b13de82d4734e6348c961222fd80df2d6e5baa1fc66b724cd62b3d8d771c&ipo=images" class="productImg"/>
+                <div class="itemCost">
+                  <p class="forge-typography--label2" style="color:gray">Item #638286</p>
+                <p class="forge-typography--subheading1">WRITING PAD 5x8 INCH 50 SHEETS</p>
+                <p class="forge-typography--heading2 green">$1.50</p>
+            </div>
+            </div>
+            <div class="quantityAddCart">
+                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                    <forge-option value="1">1</forge-option>
+                    <forge-option value="2">2</forge-option>
+                    <forge-option value="3">3</forge-option>
+                  </forge-select>
+                    <forge-button variant="tonal" class="addToCart" theme="success">
+                        <forge-icon external name="add_shopping_cart" slot="start"></forge-icon>
+                        Add to cart</forge-button>
+            </div>
+        </forge-card>
+        
+        <forge-card>
+            <div class="imageItemCost">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fartsmidnorthcoast.com%2Fwp-content%2Fuploads%2F2014%2F05%2Fno-image-available-icon-6.png&f=1&nofb=1&ipt=da63b13de82d4734e6348c961222fd80df2d6e5baa1fc66b724cd62b3d8d771c&ipo=images" class="productImg"/>
+                <div class="itemCost">
+                  <p class="forge-typography--label2" style="color:gray">Item #638287</p>
+                <p class="forge-typography--subheading1">STAMPED ENVELOPE #10 PACK OF 5</p>
+                <p class="forge-typography--heading2 green">$3.75</p>
+            </div>
+            </div>
+            <div class="quantityAddCart">
+                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                    <forge-option value="1">1</forge-option>
+                    <forge-option value="2">2</forge-option>
+                    <forge-option value="3">3</forge-option>
+                  </forge-select>
+                    <forge-button variant="tonal" class="addToCart" theme="success">
+                        <forge-icon external name="add_shopping_cart" slot="start"></forge-icon>
+                        Add to cart</forge-button>
+            </div>
+        </forge-card>
+        
+        <forge-card>
+            <div class="imageItemCost">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi5.walmartimages.com%2Fasr%2Ffba643a5-7bad-4025-bf09-1b407d4a8283_1.58a1629690d6044dbe4b2e123463ba2e.jpeg%3FodnWidth%3D1000%26odnHeight%3D1000%26odnBg%3Dffffff&f=1&nofb=1&ipt=64e24c509667562d1c3ac80e1db3f520de3f9813a2b6ff9b5519a7ac2aacd240&ipo=images" class="productImg"/>
+                <div class="itemCost">
+                  <p class="forge-typography--label2" style="color:gray">Item #638288</p>
+                <p class="forge-typography--subheading1">FRUIT OF THE LOOM WHITE T-SHIRT LARGE</p>
+                <p class="forge-typography--heading2 green">$4.50</p>
+            </div>
+            </div>
+            <div class="quantityAddCart">
+                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                    <forge-option value="1">1</forge-option>
+                    <forge-option value="2">2</forge-option>
+                    <forge-option value="3">3</forge-option>
+                  </forge-select>
+                    <forge-button variant="tonal" class="addToCart" theme="success">
+                        <forge-icon external name="add_shopping_cart" slot="start"></forge-icon>
+                        Add to cart</forge-button>
+            </div>
+        </forge-card>
+        
+        <forge-card>
+            <div class="imageItemCost">
+                <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Frbentoe.net%2Fwp-content%2Fuploads%2F2021%2F02%2FHNS_112HN6_White_Detail01-1-1615x2048.png&f=1&nofb=1&ipt=cf24f85e12e803a4052ef9369c9cc8b432873e3bfc6ddf8626d3121026837b2e&ipo=images" class="productImg"/>
+                <div class="itemCost">
+                  <p class="forge-typography--label2" style="color:gray">Item #638289</p>
+                <p class="forge-typography--subheading1">HANES MENS BRIEFS 3-PACK MEDIUM</p>
+                <p class="forge-typography--heading2 green">$7.25</p>
+            </div>
+            </div>
+            <div class="quantityAddCart">
+                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                    <forge-option value="1">1</forge-option>
+                    <forge-option value="2">2</forge-option>
+                    <forge-option value="3">3</forge-option>
+                  </forge-select>
+                    <forge-button variant="tonal" class="addToCart" theme="success">
+                        <forge-icon external name="add_shopping_cart" slot="start"></forge-icon>
+                        Add to cart</forge-button>
+            </div>
+        </forge-card>
+        
+        <forge-card>
+            <div class="imageItemCost">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi5.walmartimages.com%2Fasr%2F0a43ecf6-acfd-4b3c-be8e-ce5b4bd4b282.9e6d7afe170baf3ecb3f17f573baea4b.jpeg%3FodnWidth%3D1000%26odnHeight%3D1000%26odnBg%3Dffffff&f=1&nofb=1&ipt=fb38a345e33d86a80ac1bbd798b1ab66be88cb529045f486eb4914c16d6c91ab&ipo=images" class="productImg"/>
+                <div class="itemCost">
+                  <p class="forge-typography--label2" style="color:gray">Item #638290</p>
+                <p class="forge-typography--subheading1">OREO COOKIES 2.4 OZ PACK</p>
+                <p class="forge-typography--heading2 green">$1.80</p>
+            </div>
+            </div>
+            <div class="quantityAddCart">
+                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                    <forge-option value="1">1</forge-option>
+                    <forge-option value="2">2</forge-option>
+                    <forge-option value="3">3</forge-option>
+                  </forge-select>
+                    <forge-button variant="tonal" class="addToCart" theme="success">
+                        <forge-icon external name="add_shopping_cart" slot="start"></forge-icon>
+                        Add to cart</forge-button>
+            </div>
+        </forge-card>
+
+          <!-- Start Selection Dialog -->
+          <forge-dialog
+          trigger="open-dialog5"
+          aria-labelledby="dialog-title"
+          aria-describedby="dialog-message"
+          fullscreen-threshold="0"
+          preset="bottom-sheet"
+          class="startSelect"
+        >
+          <forge-scaffold>
+            <forge-toolbar slot="header" no-divider>
+              <h1 class="forge-typography--heading4" id="dialog-title" slot="start">
+                Select service
+              </h1>
+              <forge-icon-button slot="end" aria-label="Close dialog">
+                <forge-icon name="close"></forge-icon>
+              </forge-icon-button>
+            </forge-toolbar>
+            <div slot="body" id="dialog-message" style="padding:0 20px 20px 20px;">
+              <forge-card>
+                <div class="iconArrow">
+                  <forge-icon-button variant="tonal" aria-label="Tonal icon button" theme="success">
+                    <forge-icon external external-type="extended" name="food_fork_drink"></forge-icon>
+                  </forge-icon-button>
+                  <forge-icon external external-type="standard" name="keyboard_arrow_right"></forge-icon>
+                </div>
+                <div class="titleSub">
+                  <p class="forge-typography--heading2" style="margin: 20px 0px 10px 0px;">Standard Commissary</p>
+                  <p class="forge-typography--subheading1" style="margin:0px; color:var(--forge-theme-text-medium)">These items include food, snacks, condiments, hygiene products, and personal care items.</p>
+                </div>
+              </forge-card>
+              <forge-card>
+                <div class="iconArrow">
+                  <forge-icon-button variant="tonal" aria-label="Tonal icon button" theme="success">
+                    <forge-icon external external-type="extended" name="tshirt_crew"></forge-icon>
+                  </forge-icon-button>
+                  <forge-icon external external-type="standard" name="keyboard_arrow_right"></forge-icon>
+                </div>
+                <div class="titleSub">
+                  <p class="forge-typography--heading2" style="margin: 20px 0px 10px 0px;">Property Program</p>
+                  <p class="forge-typography--subheading1" style="margin:0px; color:var(--forge-theme-text-medium)">These items include clothing, shoes, electronics, makeup, writing tools, and more.</p>
+                </div>
+              </forge-card>
+            </div>
+          </forge-scaffold>
+        </forge-dialog>
+
+
+          <!-- Item Added Dialog -->
+
+          <!-- <forge-dialog
+          trigger="open-dialog4"
+          aria-labelledby="dialog-title"
+          aria-describedby="dialog-message"
+          fullscreen-threshold="0"
+          placement="center"       
+        >
+          <forge-scaffold>
+            <forge-toolbar slot="header" no-divider>
+              <h1 class="forge-typography--heading4" id="dialog-title" slot="start">
+                Item added to cart
+              </h1>
+              <forge-icon-button slot="end" aria-label="Close dialog">
+                <forge-icon name="close"></forge-icon>
+              </forge-icon-button>
+            </forge-toolbar>
+            <div slot="body" id="dialog-message" style="padding:0 20px 20px 20px;">
+              <div style="display: flex; align-items:center; gap: 20px;">
+              <img src="https://www.theramenrater.com/wp-content/uploads/2019/11/2019_11_21_3444_001.jpg" class="productImgCart"/>
+              <div style="display:flex; flex-direction: column;">
+                  <p class="forge-typography--label2" style="color:gray; margin-bottom:0px;">Item #636783</p>
+                <p class="forge-typography--subheading1" style="margin-bottom: 10px;">DRAGON EXPRESS HOT AND SPICY VEGETABLE LOW SODIUM RAMEN</p>
+                <forge-label-value dense style="margin: 0px;">
+                  <label slot="label">Quantity</label>
+                  <span slot="value">1</span>
+                </forge-label-value>
+              </div>
+              </div>
+            </div>
+            <forge-toolbar slot="footer" no-divider class="footerDialog2">
+                <forge-button slot="end" variant="outlined" theme="success">Continue shopping</forge-button>
+                <forge-button slot="end" variant="raised" class="checkoutBtn" theme="success"><a href="/checkout.html">Checkout</a></forge-button>
+            </forge-toolbar>
+          </forge-scaffold>
+        </forge-dialog> -->
+
+                  <!-- Order Limit Dialog -->
+
+          <forge-dialog
+          trigger="open-dialog3"
+          aria-labelledby="dialog-title"
+          aria-describedby="dialog-message"
+          type="dialog"
+          class="orderLimitDialog"
+          fullscreen-threshold="0"
+          mode="modal"
+          placement="bottom"
+          preset="bottom-sheet"
+          
+        >
+          <forge-scaffold class="orderLimitScaff">
+            <div slot="body" id="dialog-message" class="orderLimit">
+              <img src="https://cdn.forge.tylertech.com/v1/images/spot/error-spot.svg" alt="" class="spotAlert" />
+              <p class="forge-typography--heading3">Order limit reached</p>
+              <p class="forge-typography--subheading1" style="text-align: center; margin: 0;">The order limit of $125 per month has been reached.</p>
+              <p class="forge-typography--subheading1" style="text-align: center;">If your order total is below the limit in your cart, the inmate likely purchased items that contributed to reaching the limit.</p>
+            </div>
+            <forge-toolbar slot="footer" no-divider class="footerDialog2">
+                <forge-button slot="end" variant="outlined" theme="success"><a href="/">Cancel</a></forge-button>
+                <forge-button slot="end" variant="raised" class="checkoutBtn" theme="success"><a href="/">I understand, continue</a></forge-button>
+            </forge-toolbar>
+          </forge-scaffold>
+        </forge-dialog>
+          
+                          <!-- Cart Dialog -->
+
+          <forge-dialog
+          trigger="open-dialog"
+          aria-labelledby="dialog-title"
+          aria-describedby="dialog-message"
+          fullscreenThreshold="450"
+          type="dialog"
+        >
+          <forge-scaffold>
+            <forge-toolbar slot="header" divider>
+              <h1 class="forge-typography--heading4" id="dialog-title" slot="start">
+                Cart
+              </h1>
+              <forge-icon-button slot="end" aria-label="Close dialog" >
+                <forge-icon external name="close"></forge-icon>
+              </forge-icon-button>
+            </forge-toolbar>
+            <div slot="body" id="dialog-message">
+            
+                    
+                        <div class="imageItemCost">
+                          <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi5.walmartimages.com%2Fasr%2F6c0416fe-561d-4f38-8a7a-c8e468b1b6cd_1.d2c3190be373bea3c854643f31367c2e.jpeg&f=1&nofb=1&ipt=4f4cc93ab27dc51a3e9027d2bfa8923805a35789cdcb4f7c39b403ff793df203&ipo=images" class="productImgCart"/>
+                          <div class="itemCost">
+                          <p class="forge-typography--subheading1">CHEX MIX TRADITIONAL MIX 8.75 OZ</p>
+                          <p class="forge-typography--heading2 green">$5.75</p>
+                      </div>
+                      </div>
+                    
+                    <div class="quantityAddCartDialog">
+                        <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                            <forge-option value="1">1</forge-option>
+                            <forge-option value="2">2</forge-option>
+                            <forge-option value="3">3</forge-option>
+                          </forge-select>
+                            <forge-button variant="outlined" class="addToCart" theme="error">
+                                <forge-icon external external-type="extended" name="cart_minus" slot="start"></forge-icon>
+                                Remove</forge-button>
+                    </div>
+
+                    <div class="imageItemCost">
+                      <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fartsmidnorthcoast.com%2Fwp-content%2Fuploads%2F2014%2F05%2Fno-image-available-icon-6.png&f=1&nofb=1&ipt=da63b13de82d4734e6348c961222fd80df2d6e5baa1fc66b724cd62b3d8d771c&ipo=images" class="productImgCart"/>
+                      <div class="itemCost">
+                      <p class="forge-typography--subheading1">BACK COUNTRY CHICKEN CHILI WITH BEANS</p>
+                      <p class="forge-typography--heading2 green">$2.43</p>
+                  </div>
+                  </div>
+                    
+                    <div class="quantityAddCartDialog">
+                        <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                            <forge-option value="1">1</forge-option>
+                            <forge-option value="2">2</forge-option>
+                            <forge-option value="3">3</forge-option>
+                          </forge-select>
+                            <forge-button variant="outlined" class="addToCart" theme="error">
+                                <forge-icon external external-type="extended" name="cart_minus" slot="start"></forge-icon>
+                                Remove</forge-button>
+                    </div>
+
+                    <div class="imageItemCost">
+                      <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.influenster.com%2FeyJidWNrZXQiOiAiaW5mbHVlbnN0ZXJfcHJvZHVjdGlvbiIsICJrZXkiOiAibWVkaWEvcHJvZHVjdC9pbWFnZS9mMjU4OTY4NC0wNGYxLTQ2M2ItYWUwYy02OTQ2ZDlmMmI3YzQucG5nIiwgImVkaXRzIjogeyJyZXNpemUiOiB7IndpZHRoIjogNzUwLCAiaGVpZ2h0IjogNzUwLCAiZml0IjogImluc2lkZSIsICJiYWNrZ3JvdW5kIjogeyJyIjogMSwgImciOiAxLCAiYiI6IDEsICJhbHBoYSI6IDB9LCAid2l0aG91dEVubGFyZ2VtZW50IjogdHJ1ZX19LCAiZXh0ZW5kIjoge319&f=1&nofb=1&ipt=a832b80b9024fa0ae1fb3d86e12e042c6e2505bfad64db8d5eea9917bee3f050&ipo=images" class="productImgCart"/>
+                      <div class="itemCost">
+                      <p class="forge-typography--subheading1">BIGELOW GREEN TEA CLASSIC 20 CT</p>
+                      <p class="forge-typography--heading2 green">$3.75</p>
+                  </div>
+                  </div>
+                    
+                    <div class="quantityAddCartDialog">
+                        <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                            <forge-option value="1">1</forge-option>
+                            <forge-option value="2">2</forge-option>
+                            <forge-option value="3">3</forge-option>
+                          </forge-select>
+                            <forge-button variant="outlined" class="addToCart" theme="error">
+                                <forge-icon external external-type="extended" name="cart_minus" slot="start"></forge-icon>
+                                Remove</forge-button>
+                    </div>
+
+                    <p class="forge-typography--overline">Order summary</p>
+
+                    <div class="lineItems">
+                        <p class="forge-typography--label2">Subtotal</p>
+                        <p class="forge-typography--subheading1">$11.93</p>
+                    </div>
+                    <div class="lineItems">
+                        <p class="forge-typography--label2">Shipping and handling fee</p>
+                        <p class="forge-typography--subheading1">$5.95</p>
+                    </div>
+                    <div class="lineItems">
+                        <p class="forge-typography--label2">Processing fee</p>
+                        <p class="forge-typography--subheading1">$0.72</p>
+                    </div>
+                    <div class="lineItems">
+                        <p class="forge-typography--label2">Sales tax</p>
+                        <p class="forge-typography--subheading1">$1.07</p>
+                    </div>
+                    <div class="grandTotal">
+                        <p class="forge-typography--heading2">Order total</p>
+                        <p class="forge-typography--heading3 green">$19.67</p>
+                    </div>
+                    
+                    
+                    
+ 
+            </div>
+            <forge-toolbar slot="footer" divider inverted="true" class="footerDialog">
+                <forge-button slot="end" variant="outlined" theme="success">Continue Shopping</forge-button>
+                <forge-button slot="end" variant="raised" class="checkoutBtn" theme="success"><a href="/checkout.html">Checkout</a></forge-button>
+            </forge-toolbar>
+          </forge-scaffold>
+        </forge-dialog>
+          
+
+          <!-- <div class="bottom-right">
+          <forge-fab theme="success">
+            <forge-icon external name="shopping_cart"></forge-icon>
+            <span slot="label">View your cart (3)</span>
+          </forge-fab>
+        </div> -->
+          
+
+            </div>
+
+
+
+            <script src="/scripts.js"></script>
+
+
+</body>
+</html>

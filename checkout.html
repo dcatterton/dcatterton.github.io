@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Page Title</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="https://cdn.forge.tylertech.com/v1/libs/@tylertech/forge@3.1.3/forge.css" />
+<link rel="stylesheet" href="https://cdn.forge.tylertech.com/v1/css/tyler-font.css" />
+<style>
+</style>
+<script src=""></script>
+<script type="module" src="https://cdn.forge.tylertech.com/v1/libs/@tylertech/forge@3.1.3/index.js"></script>
+
+<body>
+
+
+    <forge-app-bar title-text="" theme="custom" class="custom-app-bar">
+        <forge-app-bar-menu-button slot="start"></forge-app-bar-menu-button>
+        <img src="https://visitor.vendengine.com/images/correctpay-color.png" slot="logo" class="cpLogo"/>
+      </forge-app-bar>
+      
+      <div class="titleHeader">
+        <forge-badge class="facilityBadge" theme="success" strong="true">Morgan County Correctional Complex</forge-badge>
+        <h2>Commissary Order Checkout</h2>
+      </div>
+
+
+      <div class="mobile-container">
+
+        <div class="importantAnnouncement">
+          <forge-expansion-panel>
+            <div slot="header" role="button" tabindex="0" style="padding: 0; display: flex; justify-content: space-between; align-items: center;">
+              <div><p class="forge-typography--heading2 announcement">Important information</p>
+                <p class="forge-typography--body1 subtext"> Please read information regarding our user agreement and credit card processing.</p></div>
+              <forge-open-icon></forge-open-icon>
+            </div>
+            <p class="forge-typography--body1">
+              By continuing with this transaction, I hereby agree to comply with the terms and conditions found in the End User Agreement . I also agree to the use of my credit or debit card for this purchase through CorrectPay, and acknowledge that the processing of this money transmission services is being provided by NIC Services, LLC. I agree to pay the full amount charged to my card and I understand that the funds I am placing on the account will be used by the individual I have designated to purchase good and/or services at their discretion.
+            </p>
+          </forge-expansion-panel>
+        </div>
+
+        <forge-card class="cartCard">
+
+          <div class="headName">
+            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F004%2F511%2F281%2Foriginal%2Fdefault-avatar-photo-placeholder-profile-picture-vector.jpg&f=1&nofb=1&ipt=10ef5133185bafe5307e16664ea4f17f9d9abbfdce83b4778f8cbfdcde579a82&ipo=images/" class="headshot">
+          <p class="forge-typography--heading3 inmateName">John Doe</p>
+          <p class="forge-typography--label2" style="margin-top:5px; color:gray">Morgan County Correctional Complex</p>
+          </div>
+          <div style="margin: 10px 0px;"><forge-divider></forge-divider></div>
+          <div class="cartHeader">
+            <p class="forge-typography--heading3">Order summary</p>
+            <forge-button variant="text" class="editCart" theme="success">
+              <forge-icon external name="edit" slot="start"></forge-icon>
+              Edit</forge-button>
+          </div>
+
+
+          <div class="item">
+            <forge-badge slot="badge" theme="info-secondary">1</forge-badge>
+            <p class="forge-typography--label2 itemName">CHEX MIX TRADITIONAL MIX 8.75 OZ</p>
+            <p class="forge-typography--heading1 green">$5.75</p>
+          </div>
+
+          <div class="item">
+            <forge-badge slot="badge" theme="info-secondary">1</forge-badge>
+            <p class="forge-typography--label2 itemName">BACK COUNTRY CHICKEN CHILI WITH BEANS</p>
+            <p class="forge-typography--heading1 green">$2.43</p>
+          </div>
+
+          <div class="item">
+            <forge-badge slot="badge" theme="info-secondary">1</forge-badge>
+            <p class="forge-typography--label2 itemName">BIGELOW GREEN TEA CLASSIC 20 CT</p>
+            <p class="forge-typography--heading1 green">$3.75</p>
+          </div>
+
+          <div style="margin: 20px 0px;"><forge-divider></forge-divider></div>
+                    <div class="lineItems">
+                        <p class="forge-typography--label2">Subtotal</p>
+                        <p class="forge-typography--subheading1">$11.93</p>
+                    </div>
+                    <div class="lineItems">
+                        <p class="forge-typography--label2">Shipping and handling fee</p>
+                        <p class="forge-typography--subheading1">$5.95</p>
+                    </div>
+                    <div class="lineItems">
+                        <p class="forge-typography--label2">Processing fee</p>
+                        <p class="forge-typography--subheading1">$0.72</p>
+                    </div>
+                    <div class="lineItems">
+                        <p class="forge-typography--label2">Sales tax</p>
+                        <p class="forge-typography--subheading1">$1.07</p>
+                    </div>
+                    <div class="grandTotal">
+                        <p class="forge-typography--heading2">Order total</p>
+                        <p class="forge-typography--heading3 green">$19.67</p>
+                    </div>
+
+                    <forge-inline-message theme="info-secondary">
+                      <forge-icon external slot="icon" name="info"></forge-icon>
+                      <p>
+                        A $1.00 pending charge will appear on your credit card upon order placement. This temporary hold will be voided after your order is processed.
+                      </p>
+                    </forge-inline-message>
+
+        </forge-card>
+
+        <div class="infoPanels">
+          <forge-expansion-panel>
+            <div slot="header" role="button" tabindex="0" style="padding: 0; display: flex; justify-content: space-between; align-items: center; gap:10px">
+              <forge-icon external slot="icon" name="attach_money"></forge-icon>
+                <p class="forge-typography--heading2 infoHeader" style="flex-grow:1">Fee explanation</p>
+              <forge-open-icon></forge-open-icon>
+            </div>
+            <p class="forge-typography--heading1" style="margin-bottom:0px; text-decoration: underline;">
+              Shipping and Handling Fee</p>
+              <p class="forge-typography--body1">A flat fee of $5.95 is applied per order. This fee is non-refundable once the order is processed.</p>
+
+              <p class="forge-typography--heading1" style="margin-bottom:0px; text-decoration: underline;">Processing Fee</p>
+<p class="forge-typography--body1">The credit card processing fee is 4% of the order total plus applicable sales tax. This fee is adjusted if your order is modified prior to the commissary warehouse fulfilling your order, due to commissary restrictions required by the TN DOC. This fee is non-refundable once the order is processed.
+            </p>
+          </forge-expansion-panel>
+        </div>
+
+        <div class="infoPanels">
+          <forge-expansion-panel>
+            <div slot="header" role="button" tabindex="0" style="padding: 0; display: flex; justify-content: space-between; align-items: center; gap:10px">
+              <forge-icon external external-type="extended" name="package_variant_closed"></forge-icon>
+                <p class="forge-typography--heading2 infoHeader" style="flex-grow:1">Order processing information</p>
+              <forge-open-icon></forge-open-icon>
+            </div>
+            <p class="forge-typography--body1">
+              Orders are typically processed by the commissary warehouse the same day they are packed and shipped.</p>
+
+              <p class="forge-typography--body1">Modifications may occur due to Tennessee Department of Corrections (TN DOC) restrictions or item availability.</p>
+
+              <p class="forge-typography--body1">The final credit card processing fee will reflect any changes to your order, though the $5.95 shipping and handling fee remains unchanged.</p>
+
+              <p class="forge-typography--body1">We process the payment for the order and then send the order to the commissary warehouse to be fulfilled.</p>
+          </forge-expansion-panel>
+        </div>
+        <div class="infoPanels">
+          <forge-expansion-panel>
+            <div slot="header" role="button" tabindex="0" style="padding: 0; display: flex; justify-content: space-between; align-items: center; gap:10px">
+              <forge-icon external external-type="extended" name="cash_refund"></forge-icon>
+                <p class="forge-typography--heading2 infoHeader" style="flex-grow:1">Refund policies</p>
+              <forge-open-icon></forge-open-icon>
+            </div>
+            <p class="forge-typography--body1">
+              Once your order is processed and your credit card is fully charged, there are no refunds on the $5.95 shipping and handling fee or the 4% credit card processing fee.</p>
+
+              <p class="forge-typography--body1">Your order may not be filled in full based on the offenders' available spending limit. You will be refunded for any unfulfilled items within 14 business days.  </p>
+
+              <p class="forge-typography--body1">If a refund is issued after the order is processed, it will cover only the cost of the product and the sales tax; fees will not be refunded.  </p>
+
+              <p class="forge-typography--body1">Any items that are not fulfilled will automatically be refunded within 14 business days.  </p>
+
+              <p class="forge-typography--body1">If you are requesting a refund for an item or order that was shipped to the inmate already, the inmate will need to follow the refund request process to the commissary company as normal. </p>
+
+              <p class="forge-typography--body1"> Refunds that are approved by the facility will be refunded within 14 business days once the facility has notified CorrectPay of the refund request.  </p>
+          </forge-expansion-panel>
+        </div>
+
+        <div class="infoPanels">
+          <forge-expansion-panel>
+            <div slot="header" role="button" tabindex="0" style="padding: 0; display: flex; justify-content: space-between; align-items: center; gap:10px">
+              <forge-icon external external-type="extended" name="truck_delivery_outline"></forge-icon>
+                <p class="forge-typography--heading2 infoHeader" style="flex-grow:1">Delivery schedule and restrictions</p>
+              <forge-open-icon></forge-open-icon>
+            </div>
+            <p class="forge-typography--body1">Morgan County Correctional Complex receives commissary deliveries once a week on Tuesday.</p>
+            <p class="forge-typography--body1">Orders have to be placed before 2:00 AM CDT on Tuesdays in order to be delivered that week. If you miss the cutoff time, your order will be fulfilled the following week.</p>
+            <p class="forge-typography--body1">Please order accordingly. Please be aware that Holidays may affect delivery schedules Please double-check that you are placing the order for the correct offender. If a gift basket order is placed for the wrong offender and delivered to the facility, we cannot issue a refund.</p>
+          </forge-expansion-panel>
+        </div>
+
+        <p class="forge-typography--heading3" style="margin-top:30px;">Payment method</p>
+
+        <forge-card class="creditCard">
+          <forge-checkbox checked="true">
+            <p class="forge-typography--heading2 cardHeader">Add new credit or debit card</p>
+            <p class="forge-typography--subheading1 cardSubHeader">We accept VISA, Mastercard, American Express and Discover.</p>
+          </forge-checkbox>
+        </forge-card>
+
+        <forge-text-field class="fill">
+          <label>Card number</label>
+          <input type="number" />
+        </forge-text-field>
+
+        <forge-text-field class="fill">
+          <label>Expiration date</label>
+          <input type="number" />
+        </forge-text-field>
+
+        <forge-text-field class="fill">
+          <label>CVV</label>
+          <input type="number" />
+        </forge-text-field>
+
+        <p class="forge-typography--heading3" style="margin-top:30px;">Billing information</p>
+        <forge-text-field class="fill">
+          <label>Full name</label>
+          <input type="text" />
+        </forge-text-field>
+
+        <forge-text-field class="fill">
+          <label>Street address</label>
+          <input type="text" />
+        </forge-text-field>
+
+        <forge-text-field class="fill">
+          <label>City</label>
+          <input type="text" />
+        </forge-text-field>
+        
+        <forge-select aria-label="Label" label="Country" value="1" floatLabel="true" class="fill">
+          <forge-option value="1">United States</forge-option>
+          <forge-option value="2">Option 2</forge-option>
+          <forge-option value="3">Option 3</forge-option>
+        </forge-select>
+
+        <forge-select aria-label="Label" label="State" value="1" floatLabel="true" class="fill">
+          <forge-option value="1">Alabama</forge-option>
+          <forge-option value="2">Option 2</forge-option>
+          <forge-option value="3">Option 3</forge-option>
+        </forge-select>
+
+        <forge-text-field class="fill">
+          <label>Zip code</label>
+          <input type="text" />
+        </forge-text-field>
+
+        <forge-text-field class="fill">
+          <label>Email address</label>
+          <input type="text" />
+        </forge-text-field>
+
+        <forge-text-field class="fill">
+          <label>Phone number</label>
+          <input type="text" />
+        </forge-text-field>
+
+        
+
+        <forge-card style="margin-top:20px;">
+          <div style="display: flex; flex-direction: column; justify-content: flex-start;">
+          <forge-checkbox required="true" class="checkAgree">I agree to comply with the terms and conditions found in the End User Agreement</forge-checkbox>
+        </div>
+      </forge-card>
+
+        <forge-card>
+          <div style="display: flex; flex-direction: column; justify-content: flex-start;">
+            <forge-checkbox class="checkAgree" checked>I would like to receive updates and notifications from Tennessee DOC</forge-checkbox>
+          </div>
+        </forge-card>
+
+        <forge-button variant="raised" class="filterSortBtn" theme="success">
+          Submit order and pay</forge-button>
+
+          <forge-button variant="text" id="open-dialog2" class="filterSortBtn" theme="success">
+            <a href="/">
+            <forge-icon external name="arrow_back" slot="start"></forge-icon>
+            Go back</a></forge-button>
+
+
+          
+
+            </div>
+
+
+<script>// Function to load cart data from localStorage
+  function loadCartData() {
+    const savedCartItems = localStorage.getItem('cartItems');
+    return savedCartItems ? JSON.parse(savedCartItems) : [];
+  }
+  
+  // Function to update the cart summary on the checkout page
+  function updateCartSummary() {
+    const cartItems = loadCartData();
+    const cartSummaryContainer = document.querySelector('.cartCard');
+  
+    if (cartSummaryContainer && cartItems.length > 0) {
+      let itemsHtml = '';
+      let subtotal = 0;
+  
+      cartItems.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+        itemsHtml += `
+          <div class="item">
+            <forge-badge slot="badge" theme="info-secondary">${item.quantity}</forge-badge>
+            <p class="forge-typography--label2 itemName">${item.name}</p>
+            <p class="forge-typography--heading1 green">$${itemTotal.toFixed(2)}</p>
+          </div>
+        `;
+      });
+  
+      const shippingFee = 5.95;
+      const processingFee = subtotal * 0.04; // 4% of subtotal
+      const salesTax = subtotal * 0.09; // Assuming 9% sales tax
+      const orderTotal = subtotal + shippingFee + processingFee + salesTax;
+  
+      const summaryHtml = `
+        <div class="headName">
+          <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F004%2F511%2F281%2Foriginal%2Fdefault-avatar-photo-placeholder-profile-picture-vector.jpg&f=1&nofb=1&ipt=10ef5133185bafe5307e16664ea4f17f9d9abbfdce83b4778f8cbfdcde579a82&ipo=images/" class="headshot">
+          <p class="forge-typography--heading3 inmateName">John Doe</p>
+          <p class="forge-typography--label2" style="margin-top:5px; color:gray">Morgan County Correctional Complex</p>
+        </div>
+        <div style="margin: 10px 0px;"><forge-divider></forge-divider></div>
+        <div class="cartHeader">
+          <p class="forge-typography--heading3">Order summary</p>
+          <forge-button variant="text" class="editCart" theme="success">
+            <forge-icon external name="edit" slot="start"></forge-icon>
+            Edit
+          </forge-button>
+        </div>
+  
+        ${itemsHtml}
+  
+        <div style="margin: 20px 0px;"><forge-divider></forge-divider></div>
+        <div class="lineItems">
+          <p class="forge-typography--label2">Subtotal</p>
+          <p class="forge-typography--subheading1">$${subtotal.toFixed(2)}</p>
+        </div>
+        <div class="lineItems">
+          <p class="forge-typography--label2">Shipping and handling fee</p>
+          <p class="forge-typography--subheading1">$${shippingFee.toFixed(2)}</p>
+        </div>
+        <div class="lineItems">
+          <p class="forge-typography--label2">Processing fee</p>
+          <p class="forge-typography--subheading1">$${processingFee.toFixed(2)}</p>
+        </div>
+        <div class="lineItems">
+          <p class="forge-typography--label2">Sales tax</p>
+          <p class="forge-typography--subheading1">$${salesTax.toFixed(2)}</p>
+        </div>
+        <div class="grandTotal">
+          <p class="forge-typography--heading2">Order total</p>
+          <p class="forge-typography--heading3 green">$${orderTotal.toFixed(2)}</p>
+        </div>
+  
+        <forge-inline-message theme="info-secondary">
+          <forge-icon external slot="icon" name="info"></forge-icon>
+          <p>
+            A $1.00 pending charge will appear on your credit card upon order placement. This temporary hold will be voided after your order is processed.
+          </p>
+        </forge-inline-message>
+      `;
+  
+      cartSummaryContainer.innerHTML = summaryHtml;
+  
+      // Add event listener to the "Edit" button
+      const editButton = cartSummaryContainer.querySelector('.editCart');
+      if (editButton) {
+        editButton.addEventListener('click', () => {
+          // Navigate back to the cart page
+          window.location.href = '/'; // Adjust this URL as needed
+        });
+      }
+    }
+  }
+  
+  // Call updateCartSummary when the page loads
+  document.addEventListener('DOMContentLoaded', updateCartSummary);</script>
+
+
+</body>
+</html>
