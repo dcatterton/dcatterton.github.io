@@ -86,7 +86,7 @@ function updateCartDialog() {
         </div>
         <div class="quantityAddCartDialog">
           <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="${item.quantity}">
-            ${[1, 2, 3].map(num => `<forge-option value="${num}"${num === item.quantity ? ' selected' : ''}>${num}</forge-option>`).join('')}
+            ${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => `<forge-option value="${num}"${num === item.quantity ? ' selected' : ''}>${num}</forge-option>`).join('')}
           </forge-select>
           <forge-button variant="text" class="removeFromCart" theme="error" data-id="${item.id}">
             <forge-icon external external-type="extended" name="cart_minus" slot="start"></forge-icon>
