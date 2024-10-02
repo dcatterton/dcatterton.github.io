@@ -211,7 +211,7 @@ function showItemAddedDialog(item) {
     dialog.querySelector('.continue-shopping').addEventListener('click', () => closeItemAddedDialog(dialog));
     dialog.querySelector('.checkoutBtn').addEventListener('click', () => {
       closeItemAddedDialog(dialog);
-      // Add your checkout logic here
+      window.location.href = '/checkout.html'; // Redirect to checkout page
     });
   } else {
     // Update the quantity in the existing dialog
@@ -336,3 +336,27 @@ searchInput.addEventListener('input', (event) => {
 
 // Initialize by displaying all items
 displayAllItems();
+
+// Select the filter dialog
+const filterDialog = document.querySelector('forge-dialog[trigger="open-dialog2"]');
+
+// Select the close icon, cancel button, and apply filters button
+const closeIcon = filterDialog.querySelector('forge-icon-button[aria-label="Close dialog"]');
+const cancelButton = filterDialog.querySelector('forge-button[slot="end"][variant="outlined"]');
+const applyFiltersButton = filterDialog.querySelector('.checkoutBtn');
+
+// Function to close the filter dialog
+function closeFilterDialog() {
+  filterDialog.removeAttribute('open');
+}
+
+// Add event listeners to close the dialog
+closeIcon.addEventListener('click', closeFilterDialog);
+cancelButton.addEventListener('click', closeFilterDialog);
+applyFiltersButton.addEventListener('click', () => {
+  // Apply filters logic here (if any)
+  closeFilterDialog();
+});
+
+// Prevent default behavior of anchor tags inside buttons
+cancelButton.querySelector('a').addEventListener('click', (e) => e.preventDefault());

@@ -25,7 +25,7 @@
         <forge-inline-message theme="info-secondary" class="inlineAlert">
           <forge-icon slot="icon" external name="error"></forge-icon>
           <p style="text-align:left;">
-            These orders are capped at $125 per month; full orders may not be fulfilled if the inmate contributed to reaching the limit.
+            These orders are capped at $125 per month; full orders may not be fulfilled if other individuals contributed to reaching the limit.
           </p>
         </forge-inline-message>
       </div>
@@ -68,9 +68,9 @@
                 Filter or sort items
               </h1>
               <forge-icon-button slot="end" aria-label="Close dialog" >
-                <a href="/">
+            
                 <forge-icon external name="close"></forge-icon>
-            </a>
+       
               </forge-icon-button>
             </forge-toolbar>
             <div slot="body" id="dialog-message">
@@ -127,25 +127,25 @@
               <div style="margin: 20px 0;"><forge-divider></forge-divider></div>
 
               <div class="sortRadios">
-              <p class="forge-typography--heading1">Filter by item category</p>
-              <forge-checkbox>Beverages</forge-checkbox>
-              <forge-checkbox>Candy</forge-checkbox>
-              <forge-checkbox>Chips</forge-checkbox>
-              <forge-checkbox>Condiments and seasonings</forge-checkbox>
-              <forge-checkbox>Cookies</forge-checkbox>
-              <forge-checkbox>Hot food</forge-checkbox>
-              <forge-checkbox>Hyigene</forge-checkbox>
-              <forge-checkbox>Personal care</forge-checkbox>
-              <forge-checkbox>Snacks</forge-checkbox>
-            </div>
+                <p class="forge-typography--heading1">Filter by item category</p>
+                <forge-checkbox data-category="beverages">Beverages</forge-checkbox>
+                <forge-checkbox data-category="candy">Candy</forge-checkbox>
+                <forge-checkbox data-category="chips">Chips</forge-checkbox>
+                <forge-checkbox data-category="condiments">Condiments and seasonings</forge-checkbox>
+                <forge-checkbox data-category="cookies">Cookies</forge-checkbox>
+                <forge-checkbox data-category="hot-food">Hot food</forge-checkbox>
+                <forge-checkbox data-category="hygiene">Hygiene</forge-checkbox>
+                <forge-checkbox data-category="personal-care">Personal care</forge-checkbox>
+                <forge-checkbox data-category="snacks">Snacks</forge-checkbox>
+              </div>
 
                     
                     
  
             </div>
             <forge-toolbar slot="footer" divider inverted="true" class="footerDialog">
-                <forge-button slot="end" variant="outlined" theme="success"><a href="/">Cancel</a></forge-button>
-                <forge-button slot="end" variant="raised" class="checkoutBtn" theme="success"><a href="/">Apply filters</a></forge-button>
+                <forge-button slot="end" variant="outlined" theme="success">Cancel</forge-button>
+                <forge-button slot="end" variant="raised" class="checkoutBtn" theme="success">Apply filters</forge-button>
             </forge-toolbar>
           </forge-scaffold>
         </forge-dialog>
@@ -192,7 +192,7 @@
           </p>
         </forge-inline-message> -->
 
-        <forge-card>
+        <forge-card data-category="hot-food">
             <div class="imageItemCost">
                 <img src="https://www.theramenrater.com/wp-content/uploads/2019/11/2019_11_21_3444_001.jpg" class="productImg"/>
                 <div class="itemCost">
@@ -213,7 +213,7 @@
             </div>
           </forge-card>
 
-          <forge-card>
+          <forge-card data-category="hot-food">
             <div class="imageItemCost">
                 <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fartsmidnorthcoast.com%2Fwp-content%2Fuploads%2F2014%2F05%2Fno-image-available-icon-6.png&f=1&nofb=1&ipt=da63b13de82d4734e6348c961222fd80df2d6e5baa1fc66b724cd62b3d8d771c&ipo=images" class="productImg"/>
                 <div class="itemCost">
@@ -234,7 +234,7 @@
             </div>
           </forge-card>
 
-          <forge-card>
+          <forge-card data-category="snacks">
             <div class="imageItemCost">
                 <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.minimus.biz%2Fimages%2FF40-4129503-8300bg.jpg&f=1&nofb=1&ipt=4fc2cfbe61e9a221df73a7434b7dfcacb2e35e7acd3fe5180df9c70a34514611&ipo=images" class="productImg"/>
                 <div class="itemCost">
@@ -244,7 +244,7 @@
             </div>
             </div>
             <div class="quantityAddCart">
-                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+               <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
                     <forge-option value="1">1</forge-option>
                     <forge-option value="2">2</forge-option>
                     <forge-option value="3">3</forge-option>
@@ -265,7 +265,7 @@
             </div>
             </div>
             <div class="quantityAddCart">
-                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+               <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
                     <forge-option value="1">1</forge-option>
                     <forge-option value="2">2</forge-option>
                     <forge-option value="3">3</forge-option>
@@ -286,7 +286,7 @@
             </div>
             </div>
             <div class="quantityAddCart">
-                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+               <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
                     <forge-option value="1">1</forge-option>
                     <forge-option value="2">2</forge-option>
                     <forge-option value="3">3</forge-option>
@@ -307,7 +307,7 @@
             </div>
             </div>
             <div class="quantityAddCart">
-                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+               <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
                     <forge-option value="1">1</forge-option>
                     <forge-option value="2">2</forge-option>
                     <forge-option value="3">3</forge-option>
@@ -328,7 +328,7 @@
             </div>
             </div>
             <div class="quantityAddCart">
-                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+               <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
                     <forge-option value="1">1</forge-option>
                     <forge-option value="2">2</forge-option>
                     <forge-option value="3">3</forge-option>
@@ -349,7 +349,7 @@
             </div>
             </div>
             <div class="quantityAddCart">
-                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+               <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
                     <forge-option value="1">1</forge-option>
                     <forge-option value="2">2</forge-option>
                     <forge-option value="3">3</forge-option>
@@ -370,7 +370,7 @@
             </div>
             </div>
             <div class="quantityAddCart">
-                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+               <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
                     <forge-option value="1">1</forge-option>
                     <forge-option value="2">2</forge-option>
                     <forge-option value="3">3</forge-option>
@@ -391,7 +391,7 @@
             </div>
             </div>
             <div class="quantityAddCart">
-                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+               <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
                     <forge-option value="1">1</forge-option>
                     <forge-option value="2">2</forge-option>
                     <forge-option value="3">3</forge-option>
@@ -412,7 +412,7 @@
             </div>
             </div>
             <div class="quantityAddCart">
-                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+               <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
                     <forge-option value="1">1</forge-option>
                     <forge-option value="2">2</forge-option>
                     <forge-option value="3">3</forge-option>
@@ -433,7 +433,7 @@
             </div>
             </div>
             <div class="quantityAddCart">
-                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+               <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
                     <forge-option value="1">1</forge-option>
                     <forge-option value="2">2</forge-option>
                     <forge-option value="3">3</forge-option>
@@ -454,7 +454,7 @@
             </div>
             </div>
             <div class="quantityAddCart">
-                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+               <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
                     <forge-option value="1">1</forge-option>
                     <forge-option value="2">2</forge-option>
                     <forge-option value="3">3</forge-option>
@@ -475,7 +475,7 @@
             </div>
             </div>
             <div class="quantityAddCart">
-                <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+               <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
                     <forge-option value="1">1</forge-option>
                     <forge-option value="2">2</forge-option>
                     <forge-option value="3">3</forge-option>
@@ -591,7 +591,7 @@
               <img src="https://cdn.forge.tylertech.com/v1/images/spot/error-spot.svg" alt="" class="spotAlert" />
               <p class="forge-typography--heading3">Order limit reached</p>
               <p class="forge-typography--subheading1" style="text-align: center; margin: 0;">The order limit of $125 per month has been reached.</p>
-              <p class="forge-typography--subheading1" style="text-align: center;">If your order total is below the limit in your cart, the inmate likely purchased items that contributed to reaching the limit.</p>
+              <p class="forge-typography--subheading1" style="text-align: center;">If the order total in your cart is below the limit, the inmate or other individuals likely purchased items that contributed to reaching the limit.</p>
             </div>
             <forge-toolbar slot="footer" no-divider class="footerDialog2">
                 <forge-button slot="end" variant="outlined" theme="success"><a href="/">Cancel</a></forge-button>
@@ -630,7 +630,7 @@
                       </div>
                     
                     <div class="quantityAddCartDialog">
-                        <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                       <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
                             <forge-option value="1">1</forge-option>
                             <forge-option value="2">2</forge-option>
                             <forge-option value="3">3</forge-option>
@@ -649,7 +649,7 @@
                   </div>
                     
                     <div class="quantityAddCartDialog">
-                        <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                       <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
                             <forge-option value="1">1</forge-option>
                             <forge-option value="2">2</forge-option>
                             <forge-option value="3">3</forge-option>
@@ -668,7 +668,7 @@
                   </div>
                     
                     <div class="quantityAddCartDialog">
-                        <forge-select class="quantity" aria-label="Label" label="Quantity" floatLabel="true" value="1">
+                       <forge-select class="quantity" aria-label="Label" label="Quantity" density="small" floatLabel="true" value="1">
                             <forge-option value="1">1</forge-option>
                             <forge-option value="2">2</forge-option>
                             <forge-option value="3">3</forge-option>
