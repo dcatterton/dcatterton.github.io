@@ -151,7 +151,7 @@ box-shadow: 0px 5px 10px -5px rgba(0,0,0,0.2);
   }
 
   forge-dialog {
-    --forge-dialog-max-width:420px;
+    --forge-dialog-min-width:420px;
     width: 100%;
   }
 
