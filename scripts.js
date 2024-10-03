@@ -29,7 +29,7 @@ function showItemDetailDialog(card) {
 
   // Show the dialog
   dialog.setAttribute('open', '');
-}
+} 
 
 // Function to add item to cart from the Item Detail dialog
 function addToCartFromDialog(itemId, itemName, itemPrice, itemImage, quantity) {
