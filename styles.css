@@ -161,6 +161,10 @@ box-shadow: 0px 5px 10px -5px rgba(0,0,0,0.2);
   }
 
 
+  .viewCartBtn {
+    margin-left:20px;
+  }
+
   .checkoutBtn {
     margin-left:20px;
   }
