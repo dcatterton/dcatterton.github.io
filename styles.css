@@ -14,7 +14,15 @@ body {
 {
     --forge-app-bar-background: #002A31;
     border-bottom: 1px solid grey;
-}
+    }
+
+    .sticky {
+        position: -webkit-sticky; /* Safari & IE */
+        position: sticky;
+        top: 0;
+        z-index:201;
+    }
+
 
 .cpLogo {
     height:25px;
@@ -103,7 +111,7 @@ forge-card {
 .searchToolbar {
     position: -webkit-sticky; /* Safari & IE */
 position: sticky;
-top: 0;
+top: 57px;
 z-index:200;
 -webkit-box-shadow: 0px 5px 10px -5px rgba(0,0,0,0.2);
 -moz-box-shadow: 0px 5px 10px -5px rgba(0,0,0,0.2);
@@ -141,7 +149,7 @@ box-shadow: 0px 5px 10px -5px rgba(0,0,0,0.2);
   }
 
   forge-dialog {
-    --forge-dialog-min-width:360px;
+    --forge-dialog-min-width:400px;
   }
 
   forge-dialog forge-scaffold h1 {

@@ -1,3 +1,146 @@
+// Existing code...
+
+// Function to show the Item Detail dialog
+function showItemDetailDialog(card) {
+  const itemId = card.querySelector('.forge-typography--label2').textContent.split('#')[1];
+  const itemName = card.querySelector('.forge-typography--subheading1').textContent;
+  const itemPrice = card.querySelector('.forge-typography--heading2').textContent;
+  const itemImage = card.querySelector('img').src;
+  const itemDescription = "Item description placeholder"; // You may need to add this to your HTML or fetch it from somewhere
+
+  const dialog = document.querySelector('forge-dialog[trigger="open-dialog9"]');
+  
+  // Update dialog content
+  dialog.querySelector('.productImgLg').src = itemImage;
+  dialog.querySelector('.forge-typography--subheading2').textContent = itemName;
+  dialog.querySelector('.forge-typography--subheading1').textContent = itemDescription;
+  dialog.querySelector('.priceDesc').textContent = itemPrice;
+  
+  // Set up quantity select and add to cart button
+  const quantitySelect = dialog.querySelector('.quantity');
+  const addToCartButton = dialog.querySelector('.addToCart');
+  
+  quantitySelect.value = '1'; // Reset quantity to 1
+  
+  addToCartButton.onclick = () => {
+    addToCartFromDialog(itemId, itemName, parseFloat(itemPrice.replace('$', '')), itemImage, parseInt(quantitySelect.value));
+    dialog.removeAttribute('open');
+  };
+
+  // Show the dialog
+  dialog.setAttribute('open', '');
+}
+
+// Function to add item to cart from the Item Detail dialog
+function addToCartFromDialog(itemId, itemName, itemPrice, itemImage, quantity) {
+  const itemData = {
+    id: itemId,
+    name: itemName,
+    price: itemPrice,
+    image: itemImage,
+    quantity: quantity
+  };
+
+  const existingItemIndex = cartItems.findIndex(item => item.id === itemData.id);
+  if (existingItemIndex > -1) {
+    cartItems[existingItemIndex].quantity += quantity;
+  } else {
+    cartItems.push(itemData);
+  }
+
+  updateBadge();
+  updateCartDialog();
+  showItemAddedDialog(itemData);
+  saveCartData();
+}
+
+// Modify the existing addToCart function to work with both card buttons and dialog
+function addToCart(button) {
+  const card = button.closest('forge-card');
+  const itemId = card.querySelector('.forge-typography--label2').textContent.split('#')[1];
+  const itemName = card.querySelector('.forge-typography--subheading1').textContent;
+  const itemPrice = parseFloat(card.querySelector('.forge-typography--heading2').textContent.replace('$', ''));
+  const itemImage = card.querySelector('img').src;
+  const quantitySelect = card.querySelector('.quantity');
+  const selectedQuantity = parseInt(quantitySelect.value);
+
+  addToCartFromDialog(itemId, itemName, itemPrice, itemImage, selectedQuantity);
+  
+  // Reset quantity select to 1
+  quantitySelect.value = '1';
+}
+
+// Update event listeners for item cards
+document.querySelectorAll('forge-card').forEach(card => {
+  const imageItemCost = card.querySelector('.imageItemCost');
+  if (imageItemCost) {
+    imageItemCost.addEventListener('click', () => showItemDetailDialog(card));
+  }
+
+  const addToCartButton = card.querySelector('.addToCart');
+  if (addToCartButton) {
+    addToCartButton.addEventListener('click', (event) => {
+      event.stopPropagation(); // Prevent the card click event from firing
+      addToCart(addToCartButton);
+    });
+  }
+});
+
+// Function to show the Item Added Dialog
+function showItemAddedDialog(item) {
+  const dialog = document.createElement('forge-dialog');
+  dialog.setAttribute('aria-labelledby', 'dialog-title');
+  dialog.setAttribute('aria-describedby', 'dialog-message');
+  dialog.setAttribute('fullscreen-threshold', '0');
+  dialog.setAttribute('placement', 'center');
+  dialog.setAttribute('preset', 'bottom-sheet');
+  dialog.setAttribute('mode', 'modal');
+
+  const dialogContent = `
+    <forge-scaffold>
+      <forge-toolbar slot="header" no-divider>
+        <h1 class="forge-typography--heading4" id="dialog-title" slot="start">
+          Item added to cart
+        </h1>
+        <forge-icon-button slot="end" aria-label="Close dialog" class="close-dialog">
+          <forge-icon name="close"></forge-icon>
+        </forge-icon-button>
+      </forge-toolbar>
+      <div slot="body" id="dialog-message" style="padding:0 20px 20px 20px;">
+        <div style="display: flex; align-items:center; gap: 20px;">
+          <img src="${item.image}" class="productImgCart"/>
+          <div style="display:flex; flex-direction: column;">
+            <p class="forge-typography--label2" style="color:gray; margin-bottom:0px;">Item #${item.id}</p>
+            <p class="forge-typography--subheading1" style="margin-bottom: 10px;">${item.name}</p>
+            <forge-label-value dense style="margin: 0px;">
+              <label slot="label">Quantity</label>
+              <span slot="value">${item.quantity}</span>
+            </forge-label-value>
+          </div>
+        </div>
+      </div>
+      <forge-toolbar slot="footer" no-divider class="footerDialog2">
+        <forge-button slot="end" variant="outlined" theme="success" class="continue-shopping">Continue shopping</forge-button>
+        <forge-button slot="end" variant="raised" class="checkoutBtn" theme="success">Checkout</forge-button>
+      </forge-toolbar>
+    </forge-scaffold>
+  `;
+
+  dialog.innerHTML = dialogContent;
+  document.body.appendChild(dialog);
+
+  dialog.querySelector('.close-dialog').addEventListener('click', () => dialog.remove());
+  dialog.querySelector('.continue-shopping').addEventListener('click', () => dialog.remove());
+  dialog.querySelector('.checkoutBtn').addEventListener('click', () => {
+    dialog.remove();
+    window.location.href = '/checkout.html';
+  });
+
+  dialog.setAttribute('open', '');
+}
+
+// Make sure to call loadCartData() when the page loads
+document.addEventListener('DOMContentLoaded', loadCartData);
 // Cart items array to store added products
 let cartItems = [];
               

@@ -14,7 +14,7 @@
 <body>
 
 
-    <forge-app-bar title-text="" theme="custom" class="custom-app-bar">
+    <forge-app-bar title-text="" theme="custom" class="custom-app-bar sticky">
         <forge-app-bar-menu-button slot="start"></forge-app-bar-menu-button>
         <img src="https://visitor.vendengine.com/images/correctpay-color.png" slot="logo" class="cpLogo" id="open-dialog5"/>
       </forge-app-bar>
@@ -193,7 +193,7 @@
         </forge-inline-message> -->
 
         <forge-card data-category="hot-food">
-            <div class="imageItemCost" id="open-dialog9">
+            <div class="imageItemCost">
                 <img src="https://www.theramenrater.com/wp-content/uploads/2019/11/2019_11_21_3444_001.jpg" class="productImg"/>
                 <div class="itemCost">
                   <p class="forge-typography--label2" style="color:gray">Item #636783</p>
@@ -662,10 +662,7 @@
           trigger="open-dialog9"
           aria-labelledby="dialog-title"
           aria-describedby="dialog-message"
-          type="dialog"
-          class="itemDescDialog"
           fullscreen-threshold="0"
-          mode="modal"
           placement="center"
           preset="bottom-sheet"        
         >
