@@ -178,22 +178,19 @@ function closeCartDialog() {
 }
 
 // Function to add item to cart
-function addToCart(button) {
+function addToCart(button, quantity = 0) {
   const card = button.closest('forge-card');
-  const quantitySelect = card.querySelector('.quantity');
-  const selectedQuantity = parseInt(quantitySelect.value);
-
   const itemData = {
     id: card.querySelector('.forge-typography--label2').textContent.split('#')[1],
     name: card.querySelector('.forge-typography--subheading1').textContent,
     price: parseFloat(card.querySelector('.forge-typography--heading2').textContent.replace('$', '')),
     image: card.querySelector('img').src,
-    quantity: selectedQuantity
+    quantity: quantity
   };
 
   const existingItemIndex = cartItems.findIndex(item => item.id === itemData.id);
   if (existingItemIndex > -1) {
-    cartItems[existingItemIndex].quantity += selectedQuantity;
+    cartItems[existingItemIndex].quantity += quantity;
   } else {
     cartItems.push(itemData);
   }
@@ -202,9 +199,6 @@ function addToCart(button) {
   updateCartDialog();
   showItemAddedDialog(itemData);
   saveCartData();
-
-  // Reset quantity select to 1
-  quantitySelect.value = '1';
 }
 
 // Function to update the cart dialog content
@@ -313,8 +307,10 @@ function showItemAddedDialog(item) {
     dialog.id = dialogId;
     dialog.setAttribute('aria-labelledby', 'dialog-title');
     dialog.setAttribute('aria-describedby', 'dialog-message');
-    dialog.setAttribute('placement', 'center');
     dialog.setAttribute('fullscreen-threshold', '0');
+    dialog.setAttribute('placement', 'center');
+  dialog.setAttribute('preset', 'bottom-sheet');
+  dialog.setAttribute('mode', 'modal');
 
     const dialogContent = `
       <forge-scaffold>
@@ -388,8 +384,16 @@ function updateItemQuantity(select) {
 
 // Add click event listeners to all "Add to cart" buttons
 addToCartButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    addToCart(button);
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    const card = button.closest('forge-card');
+    const quantitySelect = card.querySelector('.quantity');
+    const selectedQuantity = parseInt(quantitySelect.value);
+    
+    addToCart(button, selectedQuantity);
+    
+    // Reset quantity select to 1
+    quantitySelect.value = '1';
     
     // Optional: Show a brief animation or feedback
     button.classList.add('clicked');

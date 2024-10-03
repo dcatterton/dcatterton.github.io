@@ -149,7 +149,7 @@ box-shadow: 0px 5px 10px -5px rgba(0,0,0,0.2);
   }
 
   forge-dialog {
-    --forge-dialog-min-width:400px;
+    --forge-dialog-min-width:100%;
   }
 
   forge-dialog forge-scaffold h1 {
@@ -374,8 +374,8 @@ forge-checkbox {
 }
 
 .footerDialog2 {
-    margin: 0 auto;
     border: none;
+    padding-bottom:20px;
 }
 
 .orderLimitScaff {
