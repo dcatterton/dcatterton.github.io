@@ -73,15 +73,17 @@ p.green {
 }
 
 .productImg {
-    object-fit:contain;
-    max-width:105px;
-    height:120px;
+    object-fit: cover;
+    max-width: 105px;
+    height: auto;
+    background-color: #f6f6f6;
+    border-radius: 4px;
 }
 
 .productImgCart {
     object-fit: contain;
-    width:80px;
-    height:80px;
+    max-width:80px;
+    height:auto;
     background-color: rgb(247, 247, 247);
 }
 
@@ -93,7 +95,7 @@ forge-card {
 .itemCost {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .quantityAddCart {
@@ -149,7 +151,8 @@ box-shadow: 0px 5px 10px -5px rgba(0,0,0,0.2);
   }
 
   forge-dialog {
-    --forge-dialog-min-width:100%;
+    --forge-dialog-max-width:420px;
+    width: 100%;
   }
 
   forge-dialog forge-scaffold h1 {
@@ -403,4 +406,8 @@ forge-checkbox {
 .productImgLg {
     max-width:200px;
     max-height: 200px;
+}
+
+.hide {
+    display: none;
 }

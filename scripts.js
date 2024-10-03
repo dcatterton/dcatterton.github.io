@@ -86,58 +86,7 @@ document.querySelectorAll('forge-card').forEach(card => {
   }
 });
 
-// Function to show the Item Added Dialog
-function showItemAddedDialog(item) {
-  const dialog = document.createElement('forge-dialog');
-  dialog.setAttribute('aria-labelledby', 'dialog-title');
-  dialog.setAttribute('aria-describedby', 'dialog-message');
-  dialog.setAttribute('fullscreen-threshold', '0');
-  dialog.setAttribute('placement', 'center');
-  dialog.setAttribute('preset', 'bottom-sheet');
-  dialog.setAttribute('mode', 'modal');
 
-  const dialogContent = `
-    <forge-scaffold>
-      <forge-toolbar slot="header" no-divider>
-        <h1 class="forge-typography--heading4" id="dialog-title" slot="start">
-          Item added to cart
-        </h1>
-        <forge-icon-button slot="end" aria-label="Close dialog" class="close-dialog">
-          <forge-icon name="close"></forge-icon>
-        </forge-icon-button>
-      </forge-toolbar>
-      <div slot="body" id="dialog-message" style="padding:0 20px 20px 20px;">
-        <div style="display: flex; align-items:center; gap: 20px;">
-          <img src="${item.image}" class="productImgCart"/>
-          <div style="display:flex; flex-direction: column;">
-            <p class="forge-typography--label2" style="color:gray; margin-bottom:0px;">Item #${item.id}</p>
-            <p class="forge-typography--subheading1" style="margin-bottom: 10px;">${item.name}</p>
-            <forge-label-value dense style="margin: 0px;">
-              <label slot="label">Quantity</label>
-              <span slot="value">${item.quantity}</span>
-            </forge-label-value>
-          </div>
-        </div>
-      </div>
-      <forge-toolbar slot="footer" no-divider class="footerDialog2">
-        <forge-button slot="end" variant="outlined" theme="success" class="continue-shopping">Continue shopping</forge-button>
-        <forge-button slot="end" variant="raised" class="checkoutBtn" theme="success">Checkout</forge-button>
-      </forge-toolbar>
-    </forge-scaffold>
-  `;
-
-  dialog.innerHTML = dialogContent;
-  document.body.appendChild(dialog);
-
-  dialog.querySelector('.close-dialog').addEventListener('click', () => dialog.remove());
-  dialog.querySelector('.continue-shopping').addEventListener('click', () => dialog.remove());
-  dialog.querySelector('.checkoutBtn').addEventListener('click', () => {
-    dialog.remove();
-    window.location.href = '/checkout.html';
-  });
-
-  dialog.setAttribute('open', '');
-}
 
 // Make sure to call loadCartData() when the page loads
 document.addEventListener('DOMContentLoaded', loadCartData);
@@ -323,10 +272,9 @@ function showItemAddedDialog(item) {
           </forge-icon-button>
         </forge-toolbar>
         <div slot="body" id="dialog-message" style="padding:0 20px 20px 20px;">
-          <div style="display: flex; align-items:center; gap: 20px;">
+          <div style="display: flex; gap: 20px;">
             <img src="${item.image}" class="productImgCart"/>
             <div style="display:flex; flex-direction: column;">
-              <p class="forge-typography--label2" style="color:gray; margin-bottom:0px;">Item #${item.id}</p>
               <p class="forge-typography--subheading1" style="margin-bottom: 10px;">${item.name}</p>
               <forge-label-value dense style="margin: 0px;">
                 <label slot="label">Quantity</label>
