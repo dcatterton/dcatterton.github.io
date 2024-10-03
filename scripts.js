@@ -64,29 +64,27 @@ function addToCart(button) {
   const quantitySelect = card.querySelector('.quantity');
   const selectedQuantity = parseInt(quantitySelect.value);
 
-  const itemData = {
-    id: itemId,
-    name: itemName,
-    price: itemPrice,
-    image: itemImage,
-    quantity: selectedQuantity
-  };
-
-  const existingItemIndex = cartItems.findIndex(item => item.id === itemData.id);
-  if (existingItemIndex > -1) {
-    cartItems[existingItemIndex].quantity += selectedQuantity;
-  } else {
-    cartItems.push(itemData);
-  }
-
-  updateBadge();
-  updateCartDialog();
-  showItemAddedDialog(itemData);
-  saveCartData();
+  addToCartFromDialog(itemId, itemName, itemPrice, itemImage, selectedQuantity);
   
   // Reset quantity select to 1
   quantitySelect.value = '1';
 }
+
+// Update event listeners for item cards
+document.querySelectorAll('forge-card').forEach(card => {
+  const imageItemCost = card.querySelector('.imageItemCost');
+  if (imageItemCost) {
+    imageItemCost.addEventListener('click', () => showItemDetailDialog(card));
+  }
+
+  const addToCartButton = card.querySelector('.addToCart');
+  if (addToCartButton) {
+    addToCartButton.addEventListener('click', (event) => {
+      event.stopPropagation(); // Prevent the card click event from firing
+      addToCart(addToCartButton);
+    });
+  }
+});
 
 // Function to show the Item Added Dialog
 function showItemAddedDialog(item) {
@@ -139,13 +137,6 @@ function showItemAddedDialog(item) {
   });
 
   dialog.setAttribute('open', '');
-}
-
-function openCartDialog() {
-  const cartDialog = document.querySelector('forge-dialog[trigger="open-dialog"]');
-  if (cartDialog) {
-    cartDialog.setAttribute('open', '');
-  }
 }
 
 // Make sure to call loadCartData() when the page loads
@@ -307,54 +298,66 @@ function updateCartDialog() {
 
 // Function to show the Item Added Dialog for a specific item
 function showItemAddedDialog(item) {
-  const dialog = document.createElement('forge-dialog');
-  dialog.setAttribute('aria-labelledby', 'dialog-title');
-  dialog.setAttribute('aria-describedby', 'dialog-message');
-  dialog.setAttribute('fullscreen-threshold', '0');
-  dialog.setAttribute('placement', 'center');
+  const dialogId = `item-added-dialog-${item.id}`;
+  let dialog = document.getElementById(dialogId);
+
+  if (!dialog) {
+    // Create a new dialog if it doesn't exist
+    dialog = document.createElement('forge-dialog');
+    dialog.id = dialogId;
+    dialog.setAttribute('aria-labelledby', 'dialog-title');
+    dialog.setAttribute('aria-describedby', 'dialog-message');
+    dialog.setAttribute('fullscreen-threshold', '0');
+    dialog.setAttribute('placement', 'center');
   dialog.setAttribute('preset', 'bottom-sheet');
   dialog.setAttribute('mode', 'modal');
 
-  const dialogContent = `
-    <forge-scaffold>
-      <forge-toolbar slot="header" no-divider>
-        <h1 class="forge-typography--heading4" id="dialog-title" slot="start">
-          Item added to cart
-        </h1>
-        <forge-icon-button slot="end" aria-label="Close dialog" class="close-dialog">
-          <forge-icon name="close"></forge-icon>
-        </forge-icon-button>
-      </forge-toolbar>
-      <div slot="body" id="dialog-message" style="padding:0 20px 20px 20px;">
-        <div style="display: flex; align-items:center; gap: 20px;">
-          <img src="${item.image}" class="productImgCart"/>
-          <div style="display:flex; flex-direction: column;">
-            <p class="forge-typography--label2" style="color:gray; margin-bottom:0px;">Item #${item.id}</p>
-            <p class="forge-typography--subheading1" style="margin-bottom: 10px;">${item.name}</p>
-            <forge-label-value dense style="margin: 0px;">
-              <label slot="label">Quantity</label>
-              <span slot="value">${item.quantity}</span>
-            </forge-label-value>
+    const dialogContent = `
+      <forge-scaffold>
+        <forge-toolbar slot="header" no-divider>
+          <h1 class="forge-typography--heading4" id="dialog-title" slot="start">
+            Item added to cart
+          </h1>
+          <forge-icon-button slot="end" aria-label="Close dialog" class="close-dialog">
+            <forge-icon name="close"></forge-icon>
+          </forge-icon-button>
+        </forge-toolbar>
+        <div slot="body" id="dialog-message" style="padding:0 20px 20px 20px;">
+          <div style="display: flex; align-items:center; gap: 20px;">
+            <img src="${item.image}" class="productImgCart"/>
+            <div style="display:flex; flex-direction: column;">
+              <p class="forge-typography--label2" style="color:gray; margin-bottom:0px;">Item #${item.id}</p>
+              <p class="forge-typography--subheading1" style="margin-bottom: 10px;">${item.name}</p>
+              <forge-label-value dense style="margin: 0px;">
+                <label slot="label">Quantity</label>
+                <span slot="value">${item.quantity}</span>
+              </forge-label-value>
+            </div>
           </div>
         </div>
-      </div>
-      <forge-toolbar slot="footer" no-divider class="footerDialog2">
-        <forge-button slot="end" variant="outlined" theme="success" class="continue-shopping">Continue shopping</forge-button>
-        <forge-button slot="end" variant="raised" class="viewCartBtn" theme="success">View cart and checkout</forge-button>
-      </forge-toolbar>
-    </forge-scaffold>
-  `;
+        <forge-toolbar slot="footer" no-divider class="footerDialog2">
+          <forge-button slot="end" variant="outlined" theme="success" class="continue-shopping">Continue shopping</forge-button>
+          <forge-button slot="end" variant="raised" class="checkoutBtn" theme="success">Checkout</forge-button>
+        </forge-toolbar>
+      </forge-scaffold>
+    `;
 
-  dialog.innerHTML = dialogContent;
-  document.body.appendChild(dialog);
+    dialog.innerHTML = dialogContent;
+    document.body.appendChild(dialog);
 
-  dialog.querySelector('.close-dialog').addEventListener('click', () => dialog.remove());
-  dialog.querySelector('.continue-shopping').addEventListener('click', () => dialog.remove());
-  dialog.querySelector('.viewCartBtn').addEventListener('click', () => {
-    dialog.remove();
-    openCartDialog();
-  });
+    // Add event listeners for the new dialog
+    dialog.querySelector('.close-dialog').addEventListener('click', () => closeItemAddedDialog(dialog));
+    dialog.querySelector('.continue-shopping').addEventListener('click', () => closeItemAddedDialog(dialog));
+    dialog.querySelector('.checkoutBtn').addEventListener('click', () => {
+      closeItemAddedDialog(dialog);
+      window.location.href = '/checkout.html'; // Redirect to checkout page
+    });
+  } else {
+    // Update the quantity in the existing dialog
+    dialog.querySelector('span[slot="value"]').textContent = item.quantity;
+  }
 
+  // Show the dialog
   dialog.setAttribute('open', '');
 }
 
